@@ -1,5 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {NgOptimizedImage} from "@angular/common";
+import {ImageInterface} from "../ImageInterface";
 
 @Component({
   selector: 'image',
@@ -11,5 +12,6 @@ import {NgOptimizedImage} from "@angular/common";
   styleUrl: './images.component.css'
 })
 export class ImagesComponent {
-
+  @Input() imageInterface!: ImageInterface;
+  
 }

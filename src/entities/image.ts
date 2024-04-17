@@ -1,7 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {ImageInterface} from "../ImageInterface";
+import {ImagesComponent} from "../app/images.component";
 
 @Entity ('images')
-export class Image {
+export class Image implements ImageInterface {
   //private _visible = true;
   @PrimaryGeneratedColumn()
   _id: number | undefined;
