@@ -1,4 +1,5 @@
-import 'dotenv/config';
+import * as dotenv from 'dotenv'
+dotenv.config()
 import 'reflect-metadata';
 import { DataSource } from "typeorm";
 
@@ -15,3 +16,6 @@ export const AppDataSource = new DataSource({
   entities: [`${'entities'}/**/entities/*.{ts,js}`],
   migrations: [`${'migrations'}/**/migrations/*.{ts,js}`]
 })
+AppDataSource.initialize()
+  .then(() => console.log("Data Source has been initialized!"))
+  .catch(() => console.log("Error during Data Source initialization"))

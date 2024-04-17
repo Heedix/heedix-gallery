@@ -3,31 +3,31 @@ import {ImageInterface} from "../ImageInterface";
 import {ImagesComponent} from "../app/images.component";
 
 @Entity ('images')
-export class Image implements ImageInterface {
+export class Image {
   //private _visible = true;
   @PrimaryGeneratedColumn()
-  _id: number | undefined;
+  imageId: number | undefined;
 
-  @Column({type: 'text'})
-  _source: string | undefined;
-
-  @Column({type: 'integer'})
-  _downloads: number | undefined;
+  @Column({type: 'text', name: 'source'})
+  source: string | undefined;
 
   @Column({type: 'integer'})
-  _width: number | undefined
+  downloads: number | undefined;
 
   @Column({type: 'integer'})
-  _height: number | undefined
+  width: number | undefined;
 
   @Column({type: 'integer'})
-  _size: number | undefined
+  height: number | undefined;
+
+  @Column({type: 'integer'})
+  size: number | undefined;
 
   @Column({type: 'boolean'})
-  _visible: boolean | undefined
+  visible: boolean | undefined;
 
-  constructor(_id: number, _source: string, _downloads: number, _width: number, _height: number, _size: bigint, _visible: boolean) {
-  }
+  //constructor(_id: number, _source: string, _downloads: number, _width: number, _height: number, _size: bigint, _visible: boolean) {
+  //}
 
   /*get id() {return this._id}
 

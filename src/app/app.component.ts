@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {ImagesComponent} from "./images.component";
 import {ImageInterface} from "../ImageInterface";
+import {images} from "../Utility/ImageUtility";
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ import {ImageInterface} from "../ImageInterface";
 })
 export class AppComponent {
   title = 'Heedix Gallery';
+
+  imageList = images
 
   imageInterfaceList: ImageInterface[] = [{
       _id: 0,
