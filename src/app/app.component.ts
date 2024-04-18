@@ -15,7 +15,7 @@ import {images} from "../Utility/ImageUtility";
 export class AppComponent {
   title = 'Heedix Gallery';
 
-  imageList = images
+  //imageList = images
 
   imageInterfaceList: ImageInterface[] = [{
       _id: 0,
