@@ -1,0 +1,8 @@
+<app-navbar id="navbar">
+</app-navbar>
+<div id="imageGrid">
+  <app-images
+    *ngFor="let imageInterface of imageInterfaceList"
+    [imageInterface] = "imageInterface">
+  </app-images>
+</div>
