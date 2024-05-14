@@ -26,3 +26,11 @@ h1 {
 .imageEditInfoDivs {
   margin: auto;
 }
+
+#editAndDeleteIconsDiv {
+  margin: auto 20px auto;
+}
+
+#editIcon {
+  margin-right: 10px;
+}
