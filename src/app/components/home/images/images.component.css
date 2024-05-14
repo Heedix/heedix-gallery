@@ -1,5 +1,7 @@
 div {
   /*min-width: 300px;*/
+  align-self: flex-start;
+  top: 0;
   margin: 10px;
   display: inline-block;
   width: 300px;

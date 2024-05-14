@@ -1,0 +1,28 @@
+h1 {
+  color: #FFF;
+  font-size: 22px;
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+.imageEditCard {
+  display: flex;
+  align-content: center;
+  width: 90%;
+  background-color: #606060;
+  height: 120px;
+  margin: 20px auto auto;
+  filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
+}
+
+#imageEditCardImageDiv {
+  width: 200px;
+}
+
+.imageEditCardImages {
+  margin: 10px 10px auto;
+}
+
+.imageEditInfoDivs {
+  margin: auto;
+}

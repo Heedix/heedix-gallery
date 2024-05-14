@@ -1,0 +1,15 @@
+<div class="imageEditCard">
+  <div id="imageEditCardImageDiv">
+    <img [ngSrc]="imageInterface.source" alt="" class="imageEditCardImages" style="height: 100px; width: auto" width="500" height="500">
+  </div>
+  <div class="imageEditInfoDivs"><h1 id="name" class="imageEditInfos">{{imageInterface.source}}</h1></div>
+  <div class="imageEditInfoDivs"><h1 id="size" class="imageEditInfos">{{imageInterface.size}}</h1></div>
+  <div class="imageEditInfoDivs"><h1 id="downloads" class="imageEditInfos">{{imageInterface.downloads}} Downloads</h1></div>
+  <div class="imageEditInfoDivs">
+    <mat-slide-toggle id="visible" class="imageEditInfos"
+                      [color]="color"
+                      [checked]="imageInterface.visible"
+                      (change)="toggle($event)">
+    </mat-slide-toggle>
+  </div>
+</div>

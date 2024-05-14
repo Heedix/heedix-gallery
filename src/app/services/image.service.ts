@@ -25,4 +25,46 @@ export class ImageService {
       tap(response => console.log(response))
     );
   }
+
+  public getImageById(id: number){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.get<any>(`${this.baseUrl}/images/${id}`, httpOptions).pipe(
+
+      tap(response => console.log(response))
+    );
+  }
+
+  /*imageInterfaceList: ImageInterface[] = [];
+
+  public mapResponseAsImageInterface(input: Observable<any[]>) {
+    let returnInterfaceList: ImageInterface[] = [];
+    input.subscribe((imageInterfaceList) => {
+      returnInterfaceList = imageInterfaceList.map((item: any) => ({
+        imageId: item.imageid,
+        source: item.source,
+        downloads: item.downloads,
+        width: item.width,
+        height: item.height,
+        size: parseInt(item.size),
+        visible: item.visible
+      }));
+    })
+    console.log(this.imageInterfaceList + 'hallo hallo hallo')
+    return returnInterfaceList;
+  }*/
+
+  public updateImages() {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    //this.http.put<any>('${this.baseUrl}/images/:imageid', body)
+  }
 }

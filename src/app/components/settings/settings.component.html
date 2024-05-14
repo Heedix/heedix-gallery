@@ -1,1 +1,8 @@
-<p>settings works!</p>
+<app-navbar id="navbar">
+</app-navbar>
+<div id="imageEditCardContainer">
+  <app-image-edit-card
+  *ngFor="let imageInterface of imageInterfaceList"
+  [imageInterface]="imageInterface">
+  </app-image-edit-card>
+</div>

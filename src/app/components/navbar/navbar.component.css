@@ -1,8 +1,14 @@
-#head {
+* {
+  box-sizing: border-box;
+}
+
+#navbarGrid {
+  /*display: grid;
+  grid-template-columns: 20% auto 10%;*/
   background-color: #212121;
   position: absolute;
   top: 0;
-  left: 0;
+  /*left: 0;*/
   width: 100%;
 }
 
@@ -22,15 +28,17 @@
 }
 
 #loginIcon {
+  position: absolute;
+  margin: 9px;
 }
 
 #loginBackground {
-  margin: auto;
+  position: absolute;
   background-color: #707070;
-  right: 5px;
+  right: 18px;
+  top: 18px;
   width: 64px;
   height: 64px;
-  align-content: center;
   filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
 }
 

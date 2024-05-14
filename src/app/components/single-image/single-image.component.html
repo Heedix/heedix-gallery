@@ -1,0 +1,5 @@
+<app-navbar>
+</app-navbar>
+<div *ngFor="let imageInterface of imageInterfaces">
+  <img id="image" [ngSrc]="imageInterface.source" alt=""  [height]="imageInterface.height" [width]="imageInterface.width">
+</div>

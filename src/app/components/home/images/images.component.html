@@ -1,7 +1,9 @@
 <div *ngIf="imageInterface.visible">
-  <img [ngSrc]="imageInterface.source"
-       alt="Image"
-       style="width: 300px; height: auto"
-       [height]="imageInterface.height"
-       [width]="imageInterface.width">
+  <a [routerLink]="['/image', imageInterface.imageId]" routerLinkActive="active" ariaCurrentWhenActive="page">
+    <img [ngSrc]="imageInterface.source"
+         alt="Image"
+         style="max-width: 300px;  height: auto"
+         [height]="imageInterface.height"
+         [width]="imageInterface.width">
+  </a>
 </div>
