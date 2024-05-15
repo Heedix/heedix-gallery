@@ -21,6 +21,10 @@
   color: #FFF;
 }
 
+table {
+  border: 2px #FFF solid;
+}
+
 td {
   border: 2px #FFF solid;
   width: 50%;
