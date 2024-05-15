@@ -1,5 +1,32 @@
 <app-navbar>
 </app-navbar>
 <div *ngFor="let imageInterface of imageInterfaces">
-  <img id="image" [ngSrc]="imageInterface.source" alt=""  [height]="imageInterface.height" [width]="imageInterface.width">
+  <div id="imageDiv">
+    <img id="image" [ngSrc]="imageInterface.source" alt=""  [height]="imageInterface.height" [width]="imageInterface.width">
+  </div>
+  <div>
+    <table id="imageInfoTable">
+      <tr>
+        <td class="imageInfoTableItems">ID: {{imageInterface.imageId}}</td>
+        <td class="imageInfoTableItems">Source: {{imageInterface.source}}</td>
+      </tr>
+      <tr>
+        <td class="imageInfoTableItems">Height: {{imageInterface.height}}</td>
+        <td class="imageInfoTableItems">Width: {{imageInterface.width}}</td>
+      </tr>
+      <tr>
+        <td class="imageInfoTableItems">Downloads: {{imageInterface.downloads}}</td>
+        <td class="imageInfoTableItems">Size: {{imageInterface.size}}B</td>
+      </tr>
+      <tr>
+        <td>
+          <a [href]="imageInterface.source" download="heedix-gallery-{{imageInterface.imageId}}.jpg">
+            <Button id="downloadButton">Download</Button>
+          </a>
+        </td>
+        <td><Button id="shareButton" (click)="copyLink()">Share</Button></td>
+      </tr>
+    </table>
+  </div>
 </div>
+
