@@ -1,26 +1,26 @@
 <app-navbar>
 </app-navbar>
-<div *ngFor="let imageInterface of imageInterfaces">
+<div *ngIf="singleImage != undefined">
   <div id="imageDiv">
-    <img id="image" [ngSrc]="imageInterface.source" alt=""  [height]="imageInterface.height" [width]="imageInterface.width">
+    <img id="image" [ngSrc]="singleImage.source" alt=""  [height]="singleImage.height" [width]="singleImage.width">
   </div>
   <div>
     <table id="imageInfoTable">
       <tr>
-        <td class="imageInfoTableItems">ID: {{imageInterface.imageId}}</td>
-        <td class="imageInfoTableItems">Source: {{imageInterface.source}}</td>
+        <td class="imageInfoTableItems">ID: {{singleImage.imageId}}</td>
+        <td class="imageInfoTableItems">Source: {{singleImage.source}}</td>
       </tr>
       <tr>
-        <td class="imageInfoTableItems">Height: {{imageInterface.height}}</td>
-        <td class="imageInfoTableItems">Width: {{imageInterface.width}}</td>
+        <td class="imageInfoTableItems">Height: {{singleImage.height}}</td>
+        <td class="imageInfoTableItems">Width: {{singleImage.width}}</td>
       </tr>
       <tr>
-        <td class="imageInfoTableItems">Downloads: {{imageInterface.downloads}}</td>
-        <td class="imageInfoTableItems">Size: {{imageInterface.size}}B</td>
+        <td class="imageInfoTableItems">Downloads: {{singleImage.downloads}}</td>
+        <td class="imageInfoTableItems">Size: {{singleImage.size}}B</td>
       </tr>
       <tr>
         <td>
-          <a [href]="imageInterface.source" download="heedix-gallery-{{imageInterface.imageId}}.jpg">
+          <a [href]="singleImage.source" download="heedix-gallery-{{singleImage.imageId}}.jpg">
             <Button id="downloadButton">Download</Button>
           </a>
         </td>
