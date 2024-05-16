@@ -1,5 +1,52 @@
+* {
+  font-size: 20px;
+}
+
 #image {
-  margin: 120px auto auto;
-  height: 85vh;
+  height: auto;
   width: auto;
+  max-width: 100%;
+  max-height: 85vh;
+}
+
+#imageDiv {
+  width: fit-content;
+  margin: 120px auto auto;
+  border: 2px #FFF solid;
+}
+
+#imageInfoTable {
+  display: table;
+  width: 100%;
+  color: #FFF;
+}
+
+table {
+  border: 2px #FFF solid;
+}
+
+td {
+  border: 2px #FFF solid;
+  width: 50%;
+  text-align: center;
+  background-color: #606060;
+}
+
+.imageInfoTableItems {
+  padding: 15px;
+}
+
+button {
+  width: 100%;
+  border: none;
+  padding: 15px;
+  color: #FFF;
+}
+
+#downloadButton {
+  background-color: #5090FF;
+}
+
+#shareButton {
+  background-color: #50BB50;
 }

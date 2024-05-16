@@ -4,4 +4,5 @@ div {
   margin: 10px;
   display: inline-block;
   width: 300px;
+  filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
 }
