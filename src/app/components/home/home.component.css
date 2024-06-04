@@ -9,6 +9,19 @@
   grid-template-columns: auto;
 }
 
+#logoAndText {
+  position: absolute;
+  width: fit-content;
+}
+
+#heedixLogo {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  max-width: 400px;
+  margin-left: auto;
+}
+
 @media (min-width: 360px) {
   #imageGrid {
     margin: 50px auto;
