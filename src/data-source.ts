@@ -1,20 +1,21 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
-import {ImageEntity} from "./entity/imageEntity";
+import * as dotenv from 'dotenv'
+dotenv.config()
+import 'reflect-metadata';
+import { DataSource } from "typeorm";
+
+const port = process.env['DB_PORT'] as number | undefined;
 
 export const AppDataSource = new DataSource({
-    type: "postgres",
-    host: "heedix.de",
-    port: 5432,
-    username: "admin",
-    password: "YaPfgnD2uwY0",
-    database: "heedix-gallery",
-    synchronize: true,
-    logging: true,
-    entities: [ImageEntity]
-})
+  type: 'postgres',
+  host: process.env['DB_HOST'],
+  port: port,
+  username: process.env['DB_USER'],
+  password: process.env['DB_PASS'],
+  database: process.env['DB_NAME'],
 
+  entities: [`${'entities'}/**/entities/*.{ts,js}`],
+  migrations: [`${'migrations'}/**/migrations/*.{ts,js}`]
+})
 AppDataSource.initialize()
-  .then(() => {
-  })
-  .catch((error) => console.log(error))
+  .then(() => console.log("Data Source has been initialized!"))
+  .catch(() => console.log("Error during Data Source initialization"))

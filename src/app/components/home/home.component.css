@@ -9,17 +9,31 @@
   grid-template-columns: auto;
 }
 
-#logoAndText {
-  position: absolute;
-  width: fit-content;
+#landingViewContainer {
+  height: 100vh;
+  width: 100%;
+  background-image: url("/assets/images/mainBackgroundImage.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  align-content: center;
+  text-align: center;
+}
+
+#heedixLogoDiv {
+  width: 80vw;
+  height: 40vw;
+  max-width: 600px;
+  max-height: 300px;
+  margin: auto;
+  background-image: url("/assets/images/heedix.png");
+  background-size: cover;
 }
 
 #heedixLogo {
-  position: absolute;
   width: 80%;
   height: auto;
-  max-width: 400px;
-  margin-left: auto;
+  max-width: 600px;
 }
 
 @media (min-width: 360px) {
@@ -67,5 +81,39 @@
     -webkit-column-count:  5;
     column-count: 5;
     width: 1600px;
+  }
+}
+
+.slide-top {
+  -webkit-animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+          animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    transform: translateY(40vh);
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(40vh);
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
   }
 }
