@@ -1,29 +1,20 @@
-# Step 1: Use a Node.js base image to build the Angular app
-FROM node:18-alpine AS build
+# Step 1: Verwende ein Node.js Image
+FROM node:18-alpine
 
-# Step 2: Set the working directory
+# Step 2: Setze das Arbeitsverzeichnis
 WORKDIR /app
 
-# Step 3: Copy package.json and package-lock.json files
+# Step 3: Kopiere package.json und package-lock.json ins Arbeitsverzeichnis
 COPY package*.json ./
 
-# Step 4: Install the dependencies
+# Step 4: Installiere die Abhängigkeiten
 RUN npm install
 
-# Step 5: Copy the Angular project files
+# Step 5: Kopiere den Rest des Angular-Projekts
 COPY . .
 
-# Step 6: Build the Angular project for production
-RUN npm run build --prod
-
-# Step 7: Use a lightweight web server to serve the app
-FROM nginx:alpine
-
-# Step 8: Copy the build output to the Nginx web root
-COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
-
-# Step 9: Expose port 80
+# Step 6: Expose Port 4200, auf dem der Angular Development Server läuft
 EXPOSE 80
 
-# Step 10: Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Step 7: Starte die Angular-App mit `ng serve`
+CMD ["npm", "start"]
