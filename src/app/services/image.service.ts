@@ -9,7 +9,7 @@ import {ImageInterface} from "../interfaces/ImageInterface";
 })
 export class ImageService {
 
-  baseUrl = 'http://heedix.de:3000'
+  baseUrl = 'http://localhost:3000'
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class ImageService {
       })
     };
 
-    return this.http.get<any>(`${this.baseUrl}/images`, httpOptions).pipe(
+    return this.http.get<any>(`${this.baseUrl}/images?public=true`, httpOptions).pipe(
 
       tap(response => console.log(response))
     );
