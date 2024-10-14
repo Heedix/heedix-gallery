@@ -7,7 +7,7 @@ div {
   filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
 }
 
-.slide-top {
+/*.slide-top {
   animation: slide-top 0.75s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
@@ -24,3 +24,4 @@ div {
     opacity: 1;
   }
 }
+*/
