@@ -1,6 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background: linear-gradient(#282828, #474747) fixed;
+  background-color: #101010;
+
+  /*Firefox scrollbar styling*/
+  scrollbar-width: thin;
+  scrollbar-color: #707070 #101010;
+}
+
+/*Chrome/Safari scrollbar styling*/
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101010;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #707070;
+}
+
+/* Style the thumb when it's hovered */
+::-webkit-scrollbar-thumb:hover {
+  background: #858585; /* Color of the thumb when hovered */
 }
 
 html, body { height: 100%; }

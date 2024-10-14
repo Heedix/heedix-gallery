@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ImageInterface} from "../../interfaces/ImageInterface";
 import {ImageService} from "../../services/image.service";
 import {ImagesComponent} from "./images/images.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
 
 @Component({
@@ -11,11 +11,13 @@ import {NavbarComponent} from "../navbar/navbar.component";
   imports: [
     ImagesComponent,
     NgForOf,
-    NavbarComponent
+    NavbarComponent,
+    NgOptimizedImage
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+
 export class HomeComponent implements OnInit {
 
   imageInterfaceList: ImageInterface[] = [];
