@@ -1,4 +1,3 @@
-  GNU nano 7.2                                          Dockerfile
 # Step 1: Build Angular App
 FROM node:18-alpine AS build
 
