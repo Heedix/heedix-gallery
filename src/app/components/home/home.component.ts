@@ -4,6 +4,7 @@ import {ImageService} from "../../services/image.service";
 import {ImagesComponent} from "./images/images.component";
 import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
+import {SidebarComponent} from "../sidebar/sidebar.component";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ import {NavbarComponent} from "../navbar/navbar.component";
     ImagesComponent,
     NgForOf,
     NavbarComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    SidebarComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
