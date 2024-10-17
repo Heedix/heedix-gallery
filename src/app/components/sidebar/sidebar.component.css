@@ -4,18 +4,21 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #212121;
   padding-top: 20px;
+  filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
   transition: width 0.3s;
 }
 
 .sidebar.collapsed {
   width: 0;
   overflow: hidden;
+  filter: none;
 }
 
 .sidebar ul {
   list-style-type: none;
+  margin-top: 40px;
   padding: 0;
 }
 
@@ -38,27 +41,26 @@
 .toggle-button {
   position: relative;
   top: 10px;
-  background-color: transparent;
+  left: 10px;
+  width: fit-content;
   color: white;
   padding: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.toggle-button.collapsed {
-  left: 10px;
-}
 
 .toggle-button.expanded {
-  left: 204px;
+  left: 188px;
+  transform: rotate(180deg);
 }
 
 .main-content {
-  margin-left: 250px;
+  width: 250px;
   padding: 20px;
-  transition: margin-left 0.3s;
+  transition: 0.3s;
 }
 
 .main-content.expanded {
-  margin-left: 0;
+  width: 0;
 }

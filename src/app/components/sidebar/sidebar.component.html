@@ -1,12 +1,12 @@
 <div class="sidebar" [ngClass]="{'collapsed': isSidebarCollapsed}">
   <ul>
     <li><a href="#">Home</a></li>
-    <li><a href="settings">Login</a></li>
+    <li><a href="/settings">Login</a></li>
   </ul>
 </div>
 
 <div class="toggle-button" [ngClass]="{'collapsed': isSidebarCollapsed, 'expanded': !isSidebarCollapsed}" (click)="toggleSidebar()">
-  <img ngSrc="assets/icons/H-pink.png" height="16" width="16" alt="">
+  <img ngSrc="assets/icons/arrow-gray.svg" alt="" height="32" width="32">
 </div>
 
 <div class="main-content" [ngClass]="{'expanded': !isSidebarCollapsed}">
