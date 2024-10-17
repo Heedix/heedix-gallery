@@ -9,7 +9,7 @@ import {ImageInterface} from "../interfaces/ImageInterface";
 })
 export class ImageService {
 
-  baseUrl = 'http://localhost:3000'
+  baseUrl = 'http://heedix.de:3000'
 
   constructor(private http: HttpClient) { }
 
