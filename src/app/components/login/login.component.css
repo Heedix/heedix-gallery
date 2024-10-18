@@ -1,0 +1,115 @@
+* {
+  color: #FFF;
+  font-size: 20px;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #338ade;
+}
+
+button:active {
+  outline: none;
+  border: none;
+  background-color: #4b96e1;
+  transform: translateY(1px);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+  border: none;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #FFF;
+  -webkit-box-shadow: 0 0 0px 1000px #909090 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.login-container {
+  margin: auto;
+  width: 80%;
+  max-width: 600px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form div {
+  width: 100%;
+}
+
+.input-field {
+  background-color: #909090;
+  border-radius: 12px;
+  border-style: none;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.input-field:focus {
+  border-style: none;
+}
+
+.input-field {}
+
+.input-field::placeholder {
+  color: #E0E0E0;
+}
+
+.buttons {
+  background-color: #4b96e1;
+  height: 50px;
+  width: 80%;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+.toggle-login-register {
+  color: #4b96e1;
+  margin: 0;
+  width: 100%;
+  text-align: right;
+  text-decoration: underline;
+}
+
+.toggle-login-register:hover {
+  cursor: pointer;
+}
+
+*.login {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  filter: none;
+}
+
+*.register {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  filter: none;
+}

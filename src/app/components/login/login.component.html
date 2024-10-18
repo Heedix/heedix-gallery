@@ -1,13 +1,20 @@
-<form (ngSubmit)="onSubmit()">
-  <div>
-    <label for="username">Benutzername</label>
-    <input type="text" id="username" [(ngModel)]="username" name="username" required />
-  </div>
-
-  <div>
-    <label for="password">Passwort</label>
-    <input type="password" id="password" [(ngModel)]="password" name="password" required />
-  </div>
-
-  <button type="submit">Anmelden</button>
-</form>
+<div class="login-container">
+  <form class="form" (ngSubmit)="onSubmit()">
+    <div>
+      <input type="email" id="email" class="input-field" *ngIf="isRegisterShown" name="email" placeholder="Email address" required />
+    </div>
+    <div>
+      <input type="text" id="username" class="input-field" [(ngModel)]="username" name="username" placeholder="Username" required />
+    </div>
+    <div>
+      <input type="password" id="password" class="input-field" [(ngModel)]="password" name="password" placeholder="Password" required />
+    </div>
+    <div>
+      <input type="password" id="repeat-password" class="input-field" *ngIf="isRegisterShown" name="repeat-password" placeholder="Repeat Password"  required />
+    </div>
+    <p class="toggle-login-register" *ngIf="!isRegisterShown" (click)="toggleRegisterShown()">not registered yet?</p>
+    <p class="toggle-login-register" *ngIf="isRegisterShown" (click)="toggleRegisterShown()">already have an account?</p>
+    <button type="submit" class="buttons">Login</button>
+  </form>
+</div>
+<app-sidebar></app-sidebar>

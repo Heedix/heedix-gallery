@@ -6,13 +6,12 @@
   height: auto;
   width: auto;
   max-width: 100%;
-  max-height: 85vh;
+  max-height: 100vh;
 }
 
 #imageDiv {
   width: fit-content;
-  margin: 120px auto auto;
-  border: 2px #FFF solid;
+  margin: auto;
 }
 
 #imageInfoTable {
