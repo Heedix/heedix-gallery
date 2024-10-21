@@ -1,7 +1,8 @@
 <div class="login-container">
+  <img class="login-image" ngSrc="assets/icons/login-gray.svg" alt="" width="128" height="128">
   <form class="form" (ngSubmit)="onSubmit()">
     <div>
-      <input type="email" id="email" class="input-field" *ngIf="isRegisterShown" name="email" placeholder="Email address" required />
+      <input type="email" id="email" class="input-field" *ngIf="isRegisterShown" [(ngModel)]="email" name="email" placeholder="Email-Address" required />
     </div>
     <div>
       <input type="text" id="username" class="input-field" [(ngModel)]="username" name="username" placeholder="Username" required />
@@ -10,11 +11,10 @@
       <input type="password" id="password" class="input-field" [(ngModel)]="password" name="password" placeholder="Password" required />
     </div>
     <div>
-      <input type="password" id="repeat-password" class="input-field" *ngIf="isRegisterShown" name="repeat-password" placeholder="Repeat Password"  required />
+      <input type="password" id="repeat-password" class="input-field" *ngIf="isRegisterShown" [(ngModel)]="repeatPassword" name="repeat-password" placeholder="Repeat Password"  required />
     </div>
-    <p class="toggle-login-register" *ngIf="!isRegisterShown" (click)="toggleRegisterShown()">not registered yet?</p>
-    <p class="toggle-login-register" *ngIf="isRegisterShown" (click)="toggleRegisterShown()">already have an account?</p>
-    <button type="submit" class="buttons">Login</button>
+    <p class="toggle-login-register" (click)="toggleRegisterShown()"> {{loginRegisterToggleText}} </p>
+    <button type="submit" class="buttons"> {{loginRegisterButtonText}} </button>
   </form>
 </div>
 <app-sidebar></app-sidebar>

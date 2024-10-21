@@ -44,9 +44,19 @@ select:-webkit-autofill:focus {
 }
 
 .login-container {
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
   width: 80%;
   max-width: 600px;
+  filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
+}
+
+.login-image {
+  border: #707070 10px solid;
+  border-radius: 100px;
+  padding: 10px;
 }
 
 .form {
