@@ -21,14 +21,15 @@ h1 {
 @media (min-width: 1000px) {
   #imageEditCardImageDiv {
     width: 25%;
+    max-width: 200px;
   }
 
   .imageEditCardImages {
-
+    border-radius: 7px;
   }
 
   .imageEditInfoDivs {
-
+    width: 20%;
   }
 
   #editAndDeleteIconsDiv {

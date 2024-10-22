@@ -8,7 +8,7 @@
   <div class="imageEditInfoDivs">
     <mat-slide-toggle id="visible" class="imageEditInfos"
                       [color]="color"
-                      [checked]="imageInterface.visible"
+                      [checked]=imageInterface.public
                       (change)="toggle($event)">
     </mat-slide-toggle>
   </div>

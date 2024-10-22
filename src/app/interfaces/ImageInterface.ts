@@ -6,5 +6,5 @@ export interface ImageInterface {
   width: number;
   height: number;
   size: number;
-  visible: boolean;
+  public: boolean;
 }

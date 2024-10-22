@@ -34,7 +34,7 @@ export class SettingsComponent implements OnInit{
         width: item.width,
         height: item.height,
         size: parseInt(item.size),
-        visible: item.visible
+        public: item.public
       }));
       console.log(this.imageInterfaceList)
     })
