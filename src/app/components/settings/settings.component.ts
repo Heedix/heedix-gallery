@@ -4,6 +4,7 @@ import {ImageService} from "../../services/image.service";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {ImageEditCardComponent} from "./image-edit-card/image-edit-card.component";
 import {NgForOf} from "@angular/common";
+import {SidebarComponent} from "../sidebar/sidebar.component";
 
 @Component({
   selector: 'app-settings',
@@ -11,7 +12,8 @@ import {NgForOf} from "@angular/common";
   imports: [
     NavbarComponent,
     ImageEditCardComponent,
-    NgForOf
+    NgForOf,
+    SidebarComponent
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css'

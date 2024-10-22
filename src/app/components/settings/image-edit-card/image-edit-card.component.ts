@@ -3,7 +3,6 @@ import {ImageInterface} from "../../../interfaces/ImageInterface";
 import {NgOptimizedImage} from "@angular/common";
 import {MatSlideToggleChange, MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {ThemePalette} from "@angular/material/core";
-import EventEmitter from "node:events";
 
 @Component({
   selector: 'app-image-edit-card',
