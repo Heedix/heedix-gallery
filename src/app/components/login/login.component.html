@@ -14,6 +14,7 @@
       <input type="password" id="repeat-password" class="input-field" *ngIf="isRegisterShown" [(ngModel)]="repeatPassword" name="repeat-password" placeholder="Repeat Password"  required />
     </div>
     <p class="toggle-login-register" (click)="toggleRegisterShown()"> {{loginRegisterToggleText}} </p>
+    <p class="error-message" [ngClass]="{'errorOccurred': errorOccurred}">{{errorMessage}}</p>
     <button type="submit" class="buttons"> {{loginRegisterButtonText}} </button>
   </form>
 </div>

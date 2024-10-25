@@ -111,7 +111,17 @@ select:-webkit-autofill:focus {
   cursor: pointer;
 }
 
-*.login {
+.error-message {
+  display: none;
+}
+
+.error-message.errorOccurred {
+  color: #FF0000FF;
+  font-weight: bold;
+  display: inline;
+}
+
+/**.login {
   height: 0;
   width: 0;
   overflow: hidden;
@@ -124,3 +134,4 @@ select:-webkit-autofill:focus {
   overflow: hidden;
   filter: none;
 }
+*/

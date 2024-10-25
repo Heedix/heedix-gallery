@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
 import {repeat} from "rxjs";
-import {response} from "express";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-login',
@@ -29,6 +27,9 @@ export class LoginComponent {
   loginToggleText: string = 'not registered yet?';
   registerToggleText: string = 'already have an account?';
 
+  errorOccurred: boolean = false;
+  errorMessage: string = '';
+
   isRegisterShown = false;
   loginRegisterToggleText: string = this.loginToggleText;
   loginRegisterButtonText: string = this.loginButtonText;
@@ -44,10 +45,12 @@ export class LoginComponent {
     this.isRegisterShown = !this.isRegisterShown;
     if(this.isRegisterShown) {
       this.loginRegisterButtonText = this.registerButtonText;
-      this.loginRegisterToggleText = this.registerToggleText
+      this.loginRegisterToggleText = this.registerToggleText;
+      this.clearPage();
     } else {
       this.loginRegisterButtonText = this.loginButtonText;
       this.loginRegisterToggleText = this.loginToggleText;
+      this.clearPage();
     }
   }
 
@@ -56,21 +59,29 @@ export class LoginComponent {
     this.username = '';
     this.password = '';
     this.repeatPassword = '';
+    this.errorOccurred = false;
+    this.errorMessage = '';
   }
 
   onSubmit() {
     if(this.isRegisterShown) {
       if(this.password != this.repeatPassword) {
-        console.error('Passwords don\'t match.')
+        this.showError('Passwords don\'t match.');
       } else {
         this.authService.register(this.email, this.username, this.password).subscribe(
-          (res) => {
-            console.log(res);
+          (response) => {
+            console.log('result in frontend'+ response);
             this.toggleRegisterShown()
             this.clearPage();
           },
-          (err) => {
-            console.error('Registration failed', err)
+          (error) => {
+            if (error.error.errorCode === 'USERNAME_TAKEN') {
+              this.showError('This username is already taken.');
+            } else if (error.error.errorCode === 'EMAIL_TAKEN') {
+              this.showError('This email-address is already taken.');
+            } else {
+              this.showError(error.error.message);
+            }
           }
         );
       }
@@ -78,14 +89,24 @@ export class LoginComponent {
       this.authService.login(this.username, this.password).subscribe(
         (response) => {
           // Erfolgreiches Login
-          this.router.navigate(['/']).then(r => r);  // Navigiere zu einer sicheren Seite
+          console.log(response)
+          //this.router.navigate(['/']).then(r => r);  // Navigiere zu einer sicheren Seite
         },
         (error) => {
-          // Fehler beim Login
-          console.error('Login fehlgeschlagen', error);
+          if (error.status === 400) {
+            console.log(error.error.message)
+          } else {
+            // Allgemeiner Fehler
+            console.error('Ein unerwarteter Fehler ist aufgetreten', error.message);
+          }
         }
       );
     }
+  }
+
+  showError(message: string) {
+    this.errorOccurred = true;
+    this.errorMessage = message;
   }
 /*
   ngOnInit() {

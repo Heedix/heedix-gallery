@@ -12,16 +12,13 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(email: string, username: string, password: string): Observable<any> {
-    console.log(email, username, password)
     const encryptedPassword = CryptoJS.SHA256(password).toString();
-    console.log(encryptedPassword);
-    return this.http.post(this.apiUrl + '/register', {email, username, encryptedPassword})
+    return this.http.post(this.apiUrl + '/register', {email, username, encryptedPassword});
   }
 
   login(username: string, password: string): Observable<any> {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
-    console.log(encryptedPassword);
-    return this.http.post(this.apiUrl + '/auth/login', { username, encryptedPassword })
+    return this.http.post(this.apiUrl + '/auth/login', { username, encryptedPassword });
   }
 
   logout() {
