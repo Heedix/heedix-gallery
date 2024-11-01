@@ -16,11 +16,12 @@ export class ImageService {
   public getImages(){
     let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem('authToken')
       })
     };
 
-    return this.http.get<any>(`${this.baseUrl}/images?public=true`, httpOptions).pipe(
+    return this.http.get<any>(`${this.baseUrl}/images`, httpOptions).pipe(
 
       tap(response => console.log(response))
     );

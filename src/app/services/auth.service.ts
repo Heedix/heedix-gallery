@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   authenticate(): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     return this.http.get(this.apiUrl + '/protected', {
       headers: {
         Authorization: `Bearer ${token}` // Token im Header senden

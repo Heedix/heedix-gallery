@@ -1,4 +1,4 @@
-<div id="imageEditCardContainer">
+<div *ngIf="isAuthenticated" id="imageEditCardContainer">
   <app-image-edit-card
   *ngFor="let imageInterface of imageInterfaceList"
   [imageInterface]="imageInterface">

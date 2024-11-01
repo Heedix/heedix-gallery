@@ -3,8 +3,9 @@ import {ImageInterface} from "../../interfaces/ImageInterface";
 import {ImageService} from "../../services/image.service";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {ImageEditCardComponent} from "./image-edit-card/image-edit-card.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {SidebarComponent} from "../sidebar/sidebar.component";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-settings',
@@ -13,7 +14,8 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
     NavbarComponent,
     ImageEditCardComponent,
     NgForOf,
-    SidebarComponent
+    SidebarComponent,
+    NgIf
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css'
@@ -22,7 +24,9 @@ export class SettingsComponent implements OnInit{
 
   imageInterfaceList: ImageInterface[] = [];
 
-  constructor(private imageService:ImageService) {}
+  constructor(private imageService:ImageService, private authService: AuthService) {}
+
+  isAuthenticated: boolean = this.authService.isAuthenticated();
 
   ngOnInit() {
     this.imageService.getImages();

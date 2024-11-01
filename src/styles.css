@@ -4,7 +4,7 @@ body {
 
   /*Firefox scrollbar styling*/
   scrollbar-width: thin;
-  scrollbar-color: #707070 #101010;
+  scrollbar-color: #707070 #202020;
 }
 
 /*Chrome/Safari scrollbar styling*/
@@ -13,7 +13,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #101010;
+  background: #202020;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -25,5 +25,4 @@ body {
   background: #858585; /* Color of the thumb when hovered */
 }
 
-html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -3,6 +3,10 @@
   font-size: 20px;
 }
 
+p {
+  white-space: pre-line;
+}
+
 button {
   outline: none;
   border: none;
@@ -27,8 +31,8 @@ button:focus {
   outline: none;
   border: none;
 }
-
 /* Change Autocomplete styles in Chrome*/
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -91,6 +95,21 @@ select:-webkit-autofill:focus {
   color: #E0E0E0;
 }
 
+.passwordInputContainer {
+  position: relative;
+}
+
+.passwordVisibilityButton {
+  position: absolute;
+  top: 25px;
+  right: 5px;
+  background: transparent;
+}
+
+.passwordVisibilityButton:hover {
+  background-color: transparent;
+}
+
 .buttons {
   background-color: #4b96e1;
   height: 50px;
@@ -113,10 +132,17 @@ select:-webkit-autofill:focus {
 
 .error-message {
   display: none;
+  text-align: center;
 }
 
-.error-message.errorOccurred {
-  color: #FF0000FF;
+.error-message.infoIsError {
+  color: #CC2020;
+  font-weight: bold;
+  display: inline;
+}
+
+.error-message.infoIsInfo {
+  color: #20CC20;
   font-weight: bold;
   display: inline;
 }

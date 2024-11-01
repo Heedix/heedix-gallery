@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [],
+  imports: [
+    NgIf,
+    NgOptimizedImage
+  ],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.css'
 })
