@@ -22,10 +22,9 @@ export class AuthService {
   }
 
   logout() {
-    // Ausloggen, evtl. Token löschen
     localStorage.removeItem('authToken');
   }
-
+/*
   isAuthenticated(): boolean {
     // Überprüfe, ob der Benutzer angemeldet ist (z.B. Token in localStorage prüfen)
     return !!localStorage.getItem('authToken');
@@ -38,5 +37,5 @@ export class AuthService {
         Authorization: `Bearer ${token}` // Token im Header senden
       }
     });
-  }
+  }*/
 }

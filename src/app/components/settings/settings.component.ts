@@ -5,7 +5,6 @@ import {NavbarComponent} from "../navbar/navbar.component";
 import {ImageEditCardComponent} from "./image-edit-card/image-edit-card.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {SidebarComponent} from "../sidebar/sidebar.component";
-import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-settings',
@@ -24,9 +23,7 @@ export class SettingsComponent implements OnInit{
 
   imageInterfaceList: ImageInterface[] = [];
 
-  constructor(private imageService:ImageService, private authService: AuthService) {}
-
-  isAuthenticated: boolean = this.authService.isAuthenticated();
+  constructor(private imageService:ImageService) {}
 
   ngOnInit() {
     this.imageService.getImages();

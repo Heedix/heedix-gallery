@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
-import {repeat} from "rxjs";
+//import {repeat} from "rxjs";
 
 
 @Component({
@@ -36,6 +36,7 @@ export class LoginComponent {
   loginRegisterButtonText: string = this.loginButtonText;
 
   isPasswordVisible: boolean = false;
+  togglePasswordVisibilityIconSrc: string = 'assets/icons/closed-eye-gray.svg'
 
   email: string = '';
   username: string = '';
@@ -59,6 +60,11 @@ export class LoginComponent {
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
+    if(this.isPasswordVisible) {
+      this.togglePasswordVisibilityIconSrc = 'assets/icons/opened-eye-gray.svg'
+    } else {
+      this.togglePasswordVisibilityIconSrc = 'assets/icons/closed-eye-gray.svg'
+    }
   }
 
   clearPage() {
@@ -109,7 +115,7 @@ export class LoginComponent {
           this.showInfo('login successful', 'info');
           localStorage.setItem('authToken', response.token);
           console.log(response.token)
-          //this.router.navigate(['/']).then(r => r);  // Navigiere zu einer sicheren Seite
+          //this.router.navigate(['/']).then(r => r);  //TODO Navigate to account page
         },
         (error) => {
           if (error.error.errorCode === 'CREDENTIALS_INVALID') {
@@ -147,7 +153,7 @@ export class LoginComponent {
     let isUsernameValid: boolean = true;
     let result: string = '';
 
-    if(this.username.length < 3) {
+    if(username.length < 3) {
       result += 'Username is too short.\n';
       isUsernameValid = false;
     }
@@ -191,13 +197,13 @@ export class LoginComponent {
   ngOnInit() {
     this.authService.authenticate().subscribe(
       (response) => {
-        console.log('Geschützter Inhalt:', response);
+        console.log('Secured Content:', response);
       },
       (error) => {
-        console.error('Fehler beim Zugriff auf geschützten Inhalt:', error);
+        console.error('Failed to access secured content:', error);
       }
     );
   }
 */
-  protected readonly repeat = repeat;
+ // protected readonly repeat = repeat;
 }
