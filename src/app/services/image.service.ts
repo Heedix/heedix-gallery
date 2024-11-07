@@ -11,19 +11,24 @@ export class ImageService {
 
   baseUrl = 'http://localhost:3000'
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      authorization: 'Bearer ' + localStorage.getItem('authToken')
+    })
+  };
+
   constructor(private http: HttpClient) { }
 
   public getImages(){
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + localStorage.getItem('authToken')
-      })
-    };
+    return this.http.get<any>(`${this.baseUrl}/images`, this.httpOptions).pipe(
+      //tap(response => console.log(response))
+    );
+  }
 
-    return this.http.get<any>(`${this.baseUrl}/images`, httpOptions).pipe(
-
-      tap(response => console.log(response))
+  getSignedImageUrl(source: string) {
+    return this.http.get<{ signedUrl: string }>(this.baseUrl + `/api/getSignedImageUrl/${source}`, this.httpOptions).pipe(
+      //tap(response => console.log(response))
     );
   }
 
