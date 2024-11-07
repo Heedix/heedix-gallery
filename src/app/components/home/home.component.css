@@ -1,5 +1,6 @@
 #sidebar {
   position: fixed;
+  z-index: 900;
 }
 #mainBackgroundImage {
   height: 100vh;

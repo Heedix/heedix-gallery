@@ -1,6 +1,7 @@
 <div class="slide-top">
   <a [routerLink]="['/image', imageInterface.imageId]" routerLinkActive="active" ariaCurrentWhenActive="page">
     <img *ngIf="signedUrl" [ngSrc]="signedUrl"
+         loading="lazy"
          alt="Image"
          style="max-width: 300px;  height: auto"
          [height]="imageInterface.height"
