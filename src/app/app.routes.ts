@@ -4,13 +4,13 @@ import {HomeComponent} from "./components/home/home.component";
 import {SingleImageComponent} from "./components/single-image/single-image.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {LoginComponent} from "./components/login/login.component";
-import {FoldersComponent} from "./components/folders/folders.component";
+import {AccountContentViewComponent} from "./components/account-content-view/account-content-view.component";
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'account/folders', component: FoldersComponent},
+  {path: 'account', component: AccountContentViewComponent},
   {path: 'image/:id', component: SingleImageComponent},
   {path: '**', redirectTo: '404'},
   {path: '404', component: NotFoundComponent}

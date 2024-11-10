@@ -1,0 +1,26 @@
+<div class="card-container">
+  <div class="folder-thumbnail-container">
+    <img class="folder-thumbnail" ngSrc="{{folder.thumbnailSource}}" width="300" height="400" alt=""/>
+  </div>
+  <table class="folder-info-table">
+    <tr>
+      <td class="table-items table-folder-name" colspan="2">{{folder.name}}</td>
+    </tr>
+    <tr>
+      <td class="table-items table-left">{{folder.owner}}</td>
+      <td class="table-items table-right">{{folder.images}} Images</td>
+    </tr>
+    <tr>
+      <td class="table-items table-left">Downloads: {{folder.downloads}}</td>
+      <td class="table-items table-right">{{folder.date}}</td>
+    </tr>
+    <tr>
+      <td class="table-items visibility table-left" [ngClass]="{
+        'public':  folder.visibility === 'Public',
+        'not-listed': folder.visibility === 'Not-Listed',
+        'private': folder.visibility === 'Private'}">
+        {{ folder.visibility }}
+      </td>
+    </tr>
+  </table>
+</div>

@@ -47,24 +47,14 @@ export class LoginComponent {
 
   toggleRegisterShown(): void {
     this.isRegisterShown = !this.isRegisterShown;
-    if(this.isRegisterShown) {
-      this.loginRegisterButtonText = this.registerButtonText;
-      this.loginRegisterToggleText = this.registerToggleText;
-      this.clearPage();
-    } else {
-      this.loginRegisterButtonText = this.loginButtonText;
-      this.loginRegisterToggleText = this.loginToggleText;
-      this.clearPage();
-    }
+    this.loginRegisterButtonText = this.isRegisterShown ? this.registerButtonText : this.loginButtonText;
+    this.loginRegisterToggleText = this.isRegisterShown ? this.registerToggleText : this.loginToggleText;
+    this.clearPage();
   }
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
-    if(this.isPasswordVisible) {
-      this.togglePasswordVisibilityIconSrc = 'assets/icons/opened-eye-gray.svg'
-    } else {
-      this.togglePasswordVisibilityIconSrc = 'assets/icons/closed-eye-gray.svg'
-    }
+    this.togglePasswordVisibilityIconSrc = this.isPasswordVisible ? 'assets/icons/opened-eye-gray.svg' : 'assets/icons/closed-eye-gray.svg';
   }
 
   clearPage() {
@@ -77,55 +67,55 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.email = this.email.replace(/\s+/g, "");
-    this.username = this.username.replace(/\s+/g, "");
-    this.password = this.password.replace(/\s+/g, "");
-    this.repeatPassword = this.repeatPassword.replace(/\s+/g, "");
+    this.email = this.email.trim();
+    this.username = this.username.trim();
+    this.password = this.password.trim();
+    this.repeatPassword = this.repeatPassword.trim();
 
-    if(this.isRegisterShown) {
-      let emailValidity = this.checkEmailValidity(this.email);
-      let usernameValidity = this.checkUsernameValidity(this.username);
-      let passwordValidity = this.checkPasswordValidity(this.password);
-      if(emailValidity === 'valid' && usernameValidity === 'valid' && passwordValidity === 'valid') {
+    if (this.isRegisterShown) {
+      const emailValidity = this.checkEmailValidity(this.email);
+      const usernameValidity = this.checkUsernameValidity(this.username);
+      const passwordValidity = this.checkPasswordValidity(this.password);
+
+      if (emailValidity === 'valid' && usernameValidity === 'valid' && passwordValidity === 'valid') {
         this.authService.register(this.email, this.username, this.password).subscribe(
-          (response) => {
-            console.log('result in frontend'+ response);
-            this.toggleRegisterShown()
+          () => {
+            this.toggleRegisterShown();
             this.clearPage();
           },
-          (error) => {
-            switch (error.error.errorCode) {
-              case 'EMAIL_TAKEN':
-                this.showInfo('This email is already taken.', 'error');
-                break;
-              case 'USERNAME_TAKEN':
-                this.showInfo('This username is already taken.', 'error');
-                break;
-              default:
-                this.showInfo(error.error.message, 'error');
-            }
-          }
+          (error) => this.handleError(error)
         );
       } else {
-        this.showInfo(emailValidity + usernameValidity + passwordValidity, 'error');
+        this.showInfo((emailValidity !== 'valid' ? emailValidity : '') +
+          (usernameValidity !== 'valid' ? usernameValidity : '') +
+          (passwordValidity !== 'valid' ? passwordValidity : ''), 'error');
       }
     } else {
       this.authService.login(this.username, this.password).subscribe(
         (response) => {
           this.showInfo('login successful', 'info');
           localStorage.setItem('authToken', response.token);
-          console.log(response.token)
-          //this.router.navigate(['/']).then(r => r);  //TODO Navigate to account page
+          setTimeout(() => this.router.navigate(['/account']), 1000);
         },
-        (error) => {
-          if (error.error.errorCode === 'CREDENTIALS_INVALID') {
-            this.showInfo('Username or password is incorrect.', 'error')
-          } else {
-            this.showInfo('Unexpected error occurred', 'error');
-            console.error(error.message)
-          }
-        }
+        (error) => this.handleError(error)
       );
+    }
+  }
+
+  handleError(error: any) {
+    switch (error.error.errorCode) {
+      case 'EMAIL_TAKEN':
+        this.showInfo('This email is already taken.', 'error');
+        break;
+      case 'USERNAME_TAKEN':
+        this.showInfo('This username is already taken.', 'error');
+        break;
+      case 'CREDENTIALS_INVALID':
+        this.showInfo('Username or password is incorrect.', 'error');
+        break;
+      default:
+        this.showInfo('Unexpected error occurred', 'error');
+        console.error(error.message);
     }
   }
 
@@ -135,63 +125,41 @@ export class LoginComponent {
   }
 
   checkEmailValidity(email: string): string {
-    let isEmailValid: boolean = true;
-    let result: string = '';
-
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/g.test(email)) {
-      result += 'Please provide a valid Email-address.\n';
-      isEmailValid = false;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/g.test(email)) {
+      return 'Please provide a valid Email-address.\n';
     }
-    if(isEmailValid) {
-      return 'valid';
-    } else {
-      return result;
-    }
+    return 'valid';
   }
 
   checkUsernameValidity(username: string): string {
-    let isUsernameValid: boolean = true;
     let result: string = '';
-
     if(username.length < 3) {
       result += 'Username is too short.\n';
-      isUsernameValid = false;
     }
-    if(isUsernameValid) {
-      return 'valid';
-    } else {
-      return result;
-    }
+    return result || 'valid';
   }
 
   checkPasswordValidity(password: string): string {
-    let isPasswordValid: boolean = true;
-    let result: string = '';
-
-    if(this.password != this.repeatPassword) {
+    let result = '';
+    if (password !== this.repeatPassword) {
       result += 'Passwords don\'t match.\n';
-      isPasswordValid = false;
-    } if(this.password.length < 8) {
+    }
+    if (password.length < 8) {
       result += 'Password is too short.\n';
-      isPasswordValid = false;
-    } if(!/^.*[a-z]+.*$/g.test(password)) {
+    }
+    if (!/[a-z]/.test(password)) {
       result += 'Your password needs to contain at least one small character.\n';
-      isPasswordValid = false;
-    } if(!/^.*[A-Z]+.*$/g.test(password)) {
+    }
+    if (!/[A-Z]/.test(password)) {
       result += 'Your password needs to contain at least one large character.\n';
-      isPasswordValid = false;
-    } if(!/^.*\d+.*$/g.test(password)) {
+    }
+    if (!/\d/.test(password)) {
       result += 'Your password needs to contain at least one number.\n';
-      isPasswordValid = false;
-    } if(!/^.*\W+.*$/g.test(password)) {
+    }
+    if (!/\W/.test(password)) {
       result += 'Your password needs to contain at least one special character.\n';
-      isPasswordValid = false;
     }
-    if(isPasswordValid) {
-      return 'valid';
-    } else {
-      return result;
-    }
+    return result || 'valid';
   }
 /*
   ngOnInit() {
