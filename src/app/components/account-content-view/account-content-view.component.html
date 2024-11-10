@@ -1,0 +1,17 @@
+<div class="top-bar-container">
+  <div class="searchbar-div">
+    <app-searchbar (searchChange)="onSearch($event)"></app-searchbar>
+  </div>
+  <div class="folder-image-toggle-switch-div">
+    <label class="switch">
+      <input type="checkbox" [checked]="folderViewShown" (change)="onToggleFolderImage()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+<div class="items-grid">
+  <div class="folders-grid-items" *ngFor="let item of filteredItems">
+    <app-folder-card *ngIf="folderViewShown" [folder] = "item"></app-folder-card>
+    <app-folder-card *ngIf="!folderViewShown" [folder] = "item"></app-folder-card>
+  </div>
+</div>
