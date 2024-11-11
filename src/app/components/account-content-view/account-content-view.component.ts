@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FolderCardComponent} from "./folder-card/folder-card.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {SearchbarComponent} from "../searchbar/searchbar.component";
 import {folderOrImageInterface} from "../../interfaces/folderOrImageInterface";
+import {ImageService} from "../../services/image.service";
 
 @Component({
   selector: 'app-account-content-view',
@@ -16,7 +17,7 @@ import {folderOrImageInterface} from "../../interfaces/folderOrImageInterface";
   templateUrl: './account-content-view.component.html',
   styleUrl: './account-content-view.component.css'
 })
-export class AccountContentViewComponent {
+export class AccountContentViewComponent implements OnInit {
   items: folderOrImageInterface[] = [];
   filteredItems: folderOrImageInterface[] = [];
   folderViewShown = true;
@@ -25,7 +26,7 @@ export class AccountContentViewComponent {
   folders: folderOrImageInterface[] = [
     {
       name: 'Bilder_12.12.2012',
-      owner: 'Owner23132132',
+      username: 'Owner23132132',
       images: 30,
       downloads: 331232,
       date: '13.12.2012',
@@ -34,7 +35,7 @@ export class AccountContentViewComponent {
     },
     {
       name: 'Bilder_12.12.2012',
-      owner: 'Owner23132132',
+      username: 'Owner23132132',
       images: 30,
       downloads: 331232,
       date: '13.12.2012',
@@ -43,7 +44,7 @@ export class AccountContentViewComponent {
     },
     {
       name: 'Bilder_12.12.2012',
-      owner: 'fdfsfs',
+      username: 'fdfsfs',
       images: 30,
       downloads: 331232,
       date: '13.12.2012',
@@ -52,7 +53,7 @@ export class AccountContentViewComponent {
     },
     {
       name: 'fortnite',
-      owner: 'ewqecds',
+      username: 'ewqecds',
       images: 30,
       downloads: 331232,
       date: '13.12.2012',
@@ -61,7 +62,7 @@ export class AccountContentViewComponent {
     },
     {
       name: 'fortnite',
-      owner: 'Owneewqewqr23132132',
+      username: 'Owneewqewqr23132132',
       images: 30,
       downloads: 331232,
       date: '13.12.2012',
@@ -70,7 +71,7 @@ export class AccountContentViewComponent {
     },
   ];
 
-  images: folderOrImageInterface[] = [
+  images: folderOrImageInterface[] = [] /*[
     {
       imageid: 6,
       name: "mainBackgroundImage.jpg",
@@ -81,7 +82,7 @@ export class AccountContentViewComponent {
       public: true,
       date: "2024-10-01T22:00:00.000Z",
       viewers: null,
-      owner: "zzzzzzzzzzzzzzzzzzzzzzzzz",
+      username: "zzzzzzzzzzzzzzzzzzzzzzzzz",
       thumbnailSource: 'assets/images/bild3.jpg',
       visibility: 'Private'
     },
@@ -95,7 +96,7 @@ export class AccountContentViewComponent {
       public: true,
       date: "2024-10-13T22:00:00.000Z",
       viewers: null,
-      owner: "8b3e8e87-dce3-44b4-8963-9280c5347272",
+      username: "8b3e8e87-dce3-44b4-8963-9280c5347272",
       thumbnailSource: 'assets/images/bild3.jpg',
       visibility: 'Private'
     },
@@ -109,7 +110,7 @@ export class AccountContentViewComponent {
       public: true,
       date: "2024-10-14T22:00:00.000Z",
       viewers: null,
-      owner: "8b3e8e87-dce3-44b4-8963-9280c5347272",
+      username: "8b3e8e87-dce3-44b4-8963-9280c5347272",
       thumbnailSource: 'assets/images/bild3.jpg',
       visibility: 'Private'
     },
@@ -123,7 +124,7 @@ export class AccountContentViewComponent {
       public: true,
       date: "2024-10-24T22:00:00.000Z",
       viewers: null,
-      owner: "8b3e8e87-dce3-44b4-8963-9280c5347272",
+      username: "8b3e8e87-dce3-44b4-8963-9280c5347272",
       thumbnailSource: 'assets/images/bild3.jpg',
       visibility: 'Private'
     },
@@ -137,25 +138,26 @@ export class AccountContentViewComponent {
       public: true,
       date: "2024-10-07T22:00:00.000Z",
       viewers: null,
-      owner: "8b3e8e87-dce3-44b4-8963-9280c5347272",
+      username: "8b3e8e87-dce3-44b4-8963-9280c5347272",
       thumbnailSource: 'assets/images/bild3.jpg',
       visibility: 'Private'
     }
-  ];
+  ];*/
 
-  constructor() {
+  constructor(private imageService:ImageService) {
     this.items = this.folders;
     this.filteredItems = this.items;
   }
 
-
   onSearch(query: string) {
-    this.query = query;
-    this.filteredItems = this.items.filter(item =>
-      item.name.toLowerCase().includes(query.toLowerCase()) ||
-      item.owner.toLowerCase().includes(query.toLowerCase()) ||
-      item.date.toLowerCase().includes(query.toLowerCase())
-    );
+    if (this.items) {
+      this.query = query;
+      this.filteredItems = this.items.filter(item =>
+        item.name.toLowerCase().includes(query.toLowerCase()) ||
+        item.username.toLowerCase().includes(query.toLowerCase()) ||
+        item.date.toLowerCase().includes(query.toLowerCase())
+      );
+    }
   }
 
   onToggleFolderImage() {
@@ -167,5 +169,19 @@ export class AccountContentViewComponent {
       this.items = this.images;
       this.onSearch(this.query);
     }
+  }
+
+  ngOnInit() {
+    this.imageService.getAccountImages().subscribe((accountImageList) => {
+      this.images = accountImageList.map((item: any) => ({
+        name: 'item.name',
+        username: item.username,
+        date: item.uploaddate,
+        visibility: item.visibility,
+        source: item.source,
+        downloads: item.downloads
+      }));
+      console.log(this.images)
+    })
   }
 }

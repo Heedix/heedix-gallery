@@ -1,6 +1,6 @@
 export interface folderOrImageInterface {
   name: string;
-  owner: string;
+  username: string;
   date: string;
   visibility: string;
   [key: string]: any;

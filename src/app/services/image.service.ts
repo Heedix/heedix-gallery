@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import {map, Observable, tap} from "rxjs";
 import {response} from "express";
 import {ImageInterface} from "../interfaces/ImageInterface";
+import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,12 @@ export class ImageService {
     return this.http.get<any>(`${this.baseUrl}/images`, this.httpOptions).pipe(
       //tap(response => console.log(response))
     );
+  }
+
+  public getAccountImages() {
+    return this.http.get<any>(`${this.baseUrl}/api/account/images`, this.httpOptions).pipe(
+      //tap(response => console.log(response))
+    )
   }
 
   getSignedImageUrl(source: string) {

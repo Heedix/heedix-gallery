@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
         width: item.width,
         height: item.height,
         size: parseInt(item.size),
-        public: item.public
+        visibility: item.visibility
       }));
       console.log(this.imageInterfaceList)
     })
