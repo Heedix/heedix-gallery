@@ -4,6 +4,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {SearchbarComponent} from "../searchbar/searchbar.component";
 import {folderOrImageInterface} from "../../interfaces/folderOrImageInterface";
 import {ImageService} from "../../services/image.service";
+import {FolderService} from "../../services/folder.service";
 
 @Component({
   selector: 'app-account-content-view',
@@ -23,7 +24,7 @@ export class AccountContentViewComponent implements OnInit {
   folderViewShown = true;
   query = '';
 
-  folders: folderOrImageInterface[] = [
+  folders: folderOrImageInterface[] = [] /*[
     {
       name: 'Bilder_12.12.2012',
       username: 'Owner23132132',
@@ -69,7 +70,7 @@ export class AccountContentViewComponent implements OnInit {
       visibility: 'Not-Listed',
       thumbnailSource: 'assets/images/bild3.jpg'
     },
-  ];
+  ];*/
 
   images: folderOrImageInterface[] = [] /*[
     {
@@ -144,10 +145,7 @@ export class AccountContentViewComponent implements OnInit {
     }
   ];*/
 
-  constructor(private imageService:ImageService) {
-    this.items = this.folders;
-    this.filteredItems = this.items;
-  }
+  constructor(private imageService:ImageService, private folderService: FolderService) {}
 
   onSearch(query: string) {
     if (this.items) {
@@ -171,17 +169,10 @@ export class AccountContentViewComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.imageService.getAccountImages().subscribe((accountImageList) => {
-      this.images = accountImageList.map((item: any) => ({
-        name: 'item.name',
-        username: item.username,
-        date: item.uploaddate,
-        visibility: item.visibility,
-        source: item.source,
-        downloads: item.downloads
-      }));
-      console.log(this.images)
-    })
+  async ngOnInit() {
+    this.folders = await this.folderService.getAccountFolders();
+    this.images = await this.imageService.getAccountImages();
+    this.items = this.folders;
+    this.onSearch(this.query);
   }
 }

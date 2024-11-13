@@ -21,19 +21,31 @@ export class ImageService {
 
   constructor(private http: HttpClient) { }
 
-  public getImages(){
+  public getImages() {
     return this.http.get<any>(`${this.baseUrl}/images`, this.httpOptions).pipe(
       //tap(response => console.log(response))
     );
   }
 
-  public getAccountImages() {
-    return this.http.get<any>(`${this.baseUrl}/api/account/images`, this.httpOptions).pipe(
-      //tap(response => console.log(response))
-    )
+  public async getAccountImages(): Promise<folderOrImageInterface[]> {
+    const response = await fetch(`${this.baseUrl}/api/account/images`, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem('authToken')
+      }
+    })
+    const data = await response.json();
+    return data.map((item: any) => ({
+      name: item.name,
+      username: item.username,
+      date: item.uploaddate,
+      visibility: item.visibility,
+      source: item.source,
+      downloads: item.downloads
+    }));
   }
 
-  getSignedImageUrl(source: string) {
+  public getSignedImageUrl(source: string) {
     return this.http.get<{ signedUrl: string }>(this.baseUrl + `/api/getSignedImageUrl/${source}`, this.httpOptions).pipe(
       //tap(response => console.log(response))
     );

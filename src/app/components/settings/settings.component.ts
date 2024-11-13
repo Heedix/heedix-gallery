@@ -26,7 +26,6 @@ export class SettingsComponent implements OnInit{
   constructor(private imageService:ImageService) {}
 
   ngOnInit() {
-    this.imageService.getImages();
     this.imageService.getImages().subscribe((imageInterfaceList) => {
       this.imageInterfaceList = imageInterfaceList.map((item: any) => ({
         imageId: item.imageid,

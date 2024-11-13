@@ -51,7 +51,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #909090;
   -webkit-transition: .3s;
   transition: .3s;
 }
@@ -66,6 +66,10 @@
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
+  background-image: url('../../../assets/icons/image-gray.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
 }
 
 input:checked + .slider {
@@ -80,6 +84,7 @@ input:checked + .slider:before {
   -webkit-transform: translateX(30px);
   -ms-transform: translateX(30px);
   transform: translateX(30px);
+  background-image: url('../../../assets/icons/folder-gray.svg');
 }
 
 .slider.round {

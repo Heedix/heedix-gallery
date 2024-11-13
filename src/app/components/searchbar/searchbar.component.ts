@@ -15,7 +15,6 @@ import {NgOptimizedImage} from "@angular/common";
 export class SearchbarComponent {
   searchQuery: string = '';
 
-  // EventEmitter um das Suchergebnis nach außen zu leiten
   @Output() searchChange = new EventEmitter<string>();
 
   onSearch() {
