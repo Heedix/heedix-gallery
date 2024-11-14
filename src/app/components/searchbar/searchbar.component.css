@@ -4,6 +4,7 @@
   background-color: #909090;
   border-radius: 25px;
   position: relative;
+  filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
 }
 
 input {

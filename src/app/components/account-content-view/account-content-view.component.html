@@ -12,6 +12,6 @@
 <div class="items-grid">
   <div class="folders-grid-items" *ngFor="let item of filteredItems">
     <app-folder-card *ngIf="folderViewShown" [folder] = "item"></app-folder-card>
-    <p *ngIf="!folderViewShown">fds</p>
+    <app-image-card *ngIf="!folderViewShown" [image] = "item"></app-image-card>
   </div>
 </div>

@@ -11,7 +11,7 @@
   filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
 }
 
-.folder-thumbnail-container {
+.image-thumbnail-container {
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -20,20 +20,20 @@
   height: 250px;
 }
 
-.folder-thumbnail {
+.image-thumbnail {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.folder-icon-container {
+.image-icon-container {
   position: absolute;
   top: 5px;
   right: 5px;
   filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
 }
 
-.folder-info-table {
+.image-info-table {
   padding: 5px;
   width: 100%;
   height: 150px;
@@ -52,7 +52,7 @@
   text-align: right;
 }
 
-.table-folder-name {
+.table-image-name {
   text-align: center;
   font-size: 22px;
 }
