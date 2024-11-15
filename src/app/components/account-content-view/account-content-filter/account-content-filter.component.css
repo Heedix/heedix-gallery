@@ -1,0 +1,77 @@
+* {
+  color: #FFF;
+}
+
+.filter-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: #252525;
+  width: 400px;
+  z-index: 900;
+  overflow: hidden;
+  transition: width 0.3s;
+  padding-top: 50px;
+  filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
+}
+
+.filter-container.collapsed {
+  width: 0;
+}
+
+.toggle-button {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  width: fit-content;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 910;
+}
+
+.toggle-button.expanded {
+  left: 338px;
+}
+
+.selectors-container {
+  width: fit-content;
+  height: fit-content;
+  margin: 20px auto;
+}
+
+.selectors {
+  font-size: 22px;
+  width: 360px;
+  height: 50px;
+  background-color: #909090;
+  border: none;
+  border-radius: 12px;
+}
+
+.selectors:focus {
+  outline: none;
+}
+
+.selectors option {
+  border-radius: 12px;
+}
+
+/*TODO ab hier geht nix mehr option:hover muss irgendwie gemacht werden*/
+
+.selectors:hover,
+.selectors option:hover {
+  cursor: pointer;
+}
+
+.selectors option:hover {
+
+}
+
+.selectors.decorated option:checked {
+  background-color: #707070;
+}
+
+

@@ -19,7 +19,7 @@
 
 .searchbar-div {
   width: 80%;
-  height: 40px;
+  height: 50px;
   max-width: 1000px;
   margin: 20px auto;
 }
@@ -93,4 +93,9 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.filter-container {
+  position: fixed;
+  z-index: 1000;
 }

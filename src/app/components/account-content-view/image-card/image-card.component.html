@@ -1,6 +1,6 @@
 <div class="card-container">
   <div class="image-thumbnail-container">
-    <img class="image-thumbnail" ngSrc="{{signedUrl}}" width="300" height="400" alt=""/>
+    <img *ngIf="signedUrl" class="image-thumbnail" ngSrc="{{signedUrl}}" width="300" height="400" alt=""/>
   </div>
   <div class="image-icon-container">
     <img class="image-icon" ngSrc="/assets/icons/image-gray.svg" width="42" height="42" alt=""/>

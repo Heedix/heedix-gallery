@@ -1,3 +1,6 @@
+<div class="filter-container">
+  <app-account-content-filter (filterChanged)="setFilter($event)"></app-account-content-filter>
+</div>
 <div class="top-bar-container">
   <div class="searchbar-div">
     <app-searchbar (searchChange)="onSearch($event)"></app-searchbar>

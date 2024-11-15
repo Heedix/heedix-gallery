@@ -1,0 +1,16 @@
+<div class="filter-container" [ngClass]="{'collapsed': !isFilterOpen}">
+  <div class="selectors-container">
+    <label for="visibility"></label>
+    <select class="selectors" id="visibility" [(ngModel)]="selectedVisibility" (change)="onFilterChange()">
+      <option value="">Show all items</option>
+      <option value="public">Show public items</option>
+      <option value="not-listed">Show not-listed items</option>
+      <option value="private">Show private items</option>
+      <option value="owned">Show my items</option>
+    </select>
+  </div>
+</div>
+
+<div class="toggle-button" [ngClass]="{'expanded': isFilterOpen, 'collapsed': !isFilterOpen}" (click)="toggleFilter()">
+  <img ngSrc="assets/icons/filter-gray.svg" alt="" height="32" width="32">
+</div>
