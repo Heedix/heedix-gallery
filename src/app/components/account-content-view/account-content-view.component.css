@@ -1,10 +1,3 @@
-.top-bar-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .items-grid {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -17,18 +10,22 @@
   width: fit-content;
 }
 
+.top-bar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .searchbar-div {
   width: 80%;
   height: 40px;
   max-width: 1000px;
-  margin: 20px auto;
+  margin: 20px;
 }
 
 .folder-image-toggle-switch-div {
-  position: absolute;
-  max-width: 20%;
-  top : 20px;
-  right: 20px;
+  filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
 }
 
 .switch {
@@ -93,4 +90,9 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.account-sidebar-container {
+  position: fixed;
+  z-index: 1000;
 }

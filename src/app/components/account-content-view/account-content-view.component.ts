@@ -6,6 +6,7 @@ import {folderOrImageInterface} from "../../interfaces/folderOrImageInterface";
 import {ImageService} from "../../services/image.service";
 import {FolderService} from "../../services/folder.service";
 import {ImageCardComponent} from "./image-card/image-card.component";
+import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
 
 @Component({
   selector: 'app-account-content-view',
@@ -15,7 +16,8 @@ import {ImageCardComponent} from "./image-card/image-card.component";
     NgForOf,
     SearchbarComponent,
     NgIf,
-    ImageCardComponent
+    ImageCardComponent,
+    AccountSidebarComponent
   ],
   templateUrl: './account-content-view.component.html',
   styleUrl: './account-content-view.component.css'

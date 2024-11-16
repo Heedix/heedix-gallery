@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import {NgClass, NgOptimizedImage} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-account-sidebar',
   standalone: true,
   imports: [
-    NgClass,
-    RouterOutlet,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgClass
   ],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  templateUrl: './account-sidebar.component.html',
+  styleUrl: './account-sidebar.component.css'
 })
-export class SidebarComponent {
+export class AccountSidebarComponent {
   isSidebarCollapsed = true
+
+  username = localStorage.getItem('username');
 
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;

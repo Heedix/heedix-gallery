@@ -1,0 +1,13 @@
+<div class="account-sidebar" [ngClass]="{'collapsed': isSidebarCollapsed}">
+  <ul>
+    <li><a id="username-list-item" (click)="toggleSidebar()">{{username}}</a></li>
+    <hr class="list-spacer">
+    <li><a href="#"><img class="list-icons" ngSrc="assets/icons/house-gray.svg" alt="" height="32" width="32">Home</a></li>
+    <hr class="list-spacer">
+    <li><a href="/login"><img class="list-icons" ngSrc="assets/icons/login-gray.svg" alt="" height="32" width="32">Login</a></li>
+  </ul>
+</div>
+
+<div class="toggle-button" [ngClass]="{'collapsed': isSidebarCollapsed, 'expanded': !isSidebarCollapsed}" (click)="toggleSidebar()">
+  <img ngSrc="assets/images/sample-proifile.jpg" alt="" height="32" width="32">
+</div>
