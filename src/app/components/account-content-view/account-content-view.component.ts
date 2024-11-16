@@ -78,8 +78,7 @@ export class AccountContentViewComponent implements OnInit {
     if (this.items) {
       this.filteredItems = this.prefilteredItems.filter(item =>
         item.name.toLowerCase().includes(this.query.toLowerCase()) ||
-        item.username.toLowerCase().includes(this.query.toLowerCase()) ||
-        item.date.toLowerCase().includes(this.query.toLowerCase())
+        item.username.toLowerCase().includes(this.query.toLowerCase())
       );
     }
   }

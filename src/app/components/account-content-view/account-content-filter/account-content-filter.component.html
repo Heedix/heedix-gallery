@@ -9,6 +9,11 @@
       <option value="owned">Show my items</option>
     </select>
   </div>
+  <label for="download-range-container">Download-Range:</label>
+  <div id="download-range-container">
+    <input type="number" step="1" min="0" max="99999" id="min-downloads" class="range-inputs" [(ngModel)]="minDownloads" name="min-downloads" placeholder="Min-Downloads">
+    <input type="number" step="1" min="0" max="99999" id="max-downloads" class="range-inputs" [(ngModel)]="maxDownloads" name="max-downloads" placeholder="Max-Downloads">
+  </div>
 </div>
 
 <div class="toggle-button" [ngClass]="{'expanded': isFilterOpen, 'collapsed': !isFilterOpen}" (click)="toggleFilter()">

@@ -20,6 +20,9 @@ export class AccountContentFilterComponent {
   selectedVisibility: string = '';
   selectedType: string = '';
 
+  minDownloads: number = 0;
+  maxDownloads: number = 99999;
+
 
   @Output() filterChanged = new EventEmitter<any>();
 
