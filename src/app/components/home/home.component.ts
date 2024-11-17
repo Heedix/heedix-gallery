@@ -6,6 +6,7 @@ import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {UploadComponent} from "../upload/upload.component";
+import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ import {UploadComponent} from "../upload/upload.component";
     NavbarComponent,
     NgOptimizedImage,
     SidebarComponent,
-    UploadComponent
+    UploadComponent,
+    AccountSidebarComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

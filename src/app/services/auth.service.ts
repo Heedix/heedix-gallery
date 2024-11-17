@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import CryptoJS from 'crypto-js';
 
 @Injectable({
@@ -9,7 +9,8 @@ import CryptoJS from 'crypto-js';
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   register(email: string, username: string, password: string): Observable<any> {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
@@ -18,18 +19,29 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
-    return this.http.post(this.apiUrl + '/auth/login', { username, encryptedPassword });
+    return this.http.post(this.apiUrl + '/auth/login', {username, encryptedPassword});
+  }
+
+  async isAuthenticated(): Promise<string | null> {
+    const response = await fetch(`${this.apiUrl}/auth/authorize`, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem('authToken')
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data.userId || null;
+    }
+    return null;
   }
 
   logout() {
     localStorage.removeItem('authToken');
-  }
-/*
-  isAuthenticated(): boolean {
-    // Überprüfe, ob der Benutzer angemeldet ist (z.B. Token in localStorage prüfen)
-    return !!localStorage.getItem('authToken');
+    localStorage.removeItem('username');
   }
 
+  /*
   authenticate(): Observable<any> {
     const token = localStorage.getItem('authToken');
     return this.http.get(this.apiUrl + '/protected', {

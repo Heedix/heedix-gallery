@@ -64,7 +64,7 @@ select:-webkit-autofill:focus {
 
 .login-image {
   border: #707070 10px solid;
-  border-radius: 100px;
+  border-radius: 50%;
   padding: 10px;
   margin: 25px;
 }

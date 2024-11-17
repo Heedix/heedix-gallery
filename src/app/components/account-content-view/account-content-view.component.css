@@ -91,8 +91,3 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
-.account-sidebar-container {
-  position: fixed;
-  z-index: 1000;
-}
