@@ -22,8 +22,8 @@ export class AccountSidebarComponent implements OnInit {
   isLoggedIn = false;
   userId: string | null = null;
 
-  username = localStorage.getItem('username') || 'Unknown';
-  profilePictureUrl = '/assets/images/sample-profile.png';
+  username: string | null = 'Unknown';
+  profilePictureUrl = '/assets/icons/question-mark-gray.svg';
 
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
@@ -38,6 +38,7 @@ export class AccountSidebarComponent implements OnInit {
     this.isLoggedIn = !!this.userId;
     if (this.isLoggedIn) {
       const extensions = ['.jpg', '.png'];
+      this.username = localStorage.getItem('username');
       for (const ext of extensions) {
         const url = `${this.baseUrl}${this.userId}${ext}`;
         if (await this.imageExists(url)) {
