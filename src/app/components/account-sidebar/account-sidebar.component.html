@@ -1,0 +1,39 @@
+<div class="account-sidebar" [ngClass]="{'collapsed': isSidebarCollapsed}">
+  <ul>
+    <li>
+      <a id="username-list-item" (click)="toggleSidebar()">
+        <div class="toggle-button" [ngClass]="{'collapsed': isSidebarCollapsed, 'expanded': !isSidebarCollapsed}">
+          <img [ngSrc]="profilePictureUrl" alt="" height="32" width="32">
+        </div>
+        {{ username }}
+      </a>
+      <hr class="list-spacer">
+    </li>
+    <li *ngIf="isLoggedIn">
+      <a href="/account">
+        <img class="list-icons" ngSrc="assets/icons/login-gray.svg" alt="" height="32" width="32">
+        Account
+      </a>
+      <hr class="list-spacer">
+    </li>
+    <li *ngIf="isLoggedIn">
+      <a href="/account/settings">
+        <img class="list-icons" ngSrc="assets/icons/settings-gray.svg" alt="" height="32" width="32">
+        Settings
+      </a>
+      <hr class="list-spacer">
+    </li>
+    <li *ngIf="!isLoggedIn">
+      <a href="/login">
+        <img class="list-icons" ngSrc="assets/icons/login-gray.svg" alt="" height="32" width="32">
+        Login
+      </a>
+    </li>
+    <li *ngIf="isLoggedIn">
+      <a (click)="logout()" href="/">
+        <img class="list-icons" ngSrc="assets/icons/logout-gray.svg" alt="" height="32" width="32">
+        Logout
+      </a>
+    </li>
+  </ul>
+</div>

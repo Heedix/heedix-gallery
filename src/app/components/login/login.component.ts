@@ -95,6 +95,7 @@ export class LoginComponent {
         (response) => {
           this.showInfo('login successful', 'info');
           localStorage.setItem('authToken', response.token);
+          localStorage.setItem('username', response.username);
           setTimeout(() => this.router.navigate(['/account']), 1000);
         },
         (error) => this.handleError(error)

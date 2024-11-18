@@ -19,5 +19,4 @@ export class SidebarComponent {
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
-
 }
