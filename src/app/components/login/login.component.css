@@ -141,13 +141,13 @@ select:-webkit-autofill:focus {
 }
 
 .error-message.infoIsError {
-  color: #CC2020;
+  color: #AA3333;
   font-weight: bold;
   display: inline;
 }
 
 .error-message.infoIsInfo {
-  color: #20CC20;
+  color: #33AA33;
   font-weight: bold;
   display: inline;
 }

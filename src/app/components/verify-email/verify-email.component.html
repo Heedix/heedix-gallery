@@ -1,0 +1,6 @@
+<p class="info-message"
+   [ngClass]="{
+    'infoIsError': infoType === 'error',
+    'infoIsInfo': infoType === 'info'}">
+  {{ infoMessage }}
+</p>
