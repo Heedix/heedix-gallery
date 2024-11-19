@@ -1,0 +1,13 @@
+.info-message {
+  text-align: center;
+  color: #FFF;
+  font-size: 50px;
+}
+
+.info-message.infoIsError {
+  color: #AA3333;
+}
+
+.info-message.infoIsInfo {
+  color: #33AA33;
+}

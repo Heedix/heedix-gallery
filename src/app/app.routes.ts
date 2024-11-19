@@ -5,11 +5,13 @@ import {SingleImageComponent} from "./components/single-image/single-image.compo
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {LoginComponent} from "./components/login/login.component";
 import {AccountContentViewComponent} from "./components/account-content-view/account-content-view.component";
+import {VerifyEmailComponent} from "./components/verify-email/verify-email.component";
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'verify', component: VerifyEmailComponent},
   {path: 'account', component: AccountContentViewComponent},
   {path: 'image/:id', component: SingleImageComponent},
   {path: '**', redirectTo: '404'},
