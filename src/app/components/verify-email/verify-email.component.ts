@@ -4,12 +4,16 @@ import {HttpClient} from '@angular/common/http';
 import {NgClass} from "@angular/common";
 import { Router } from '@angular/router';
 import {FormGroupName} from "@angular/forms";
+import {SidebarComponent} from "../sidebar/sidebar.component";
+import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
 
 @Component({
   selector: 'app-verify-email',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
+    SidebarComponent,
+    AccountSidebarComponent
   ],
   templateUrl: './verify-email.component.html',
   styleUrl: './verify-email.component.css'
