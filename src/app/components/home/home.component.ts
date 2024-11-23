@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.imageService.getImages().subscribe((imageInterfaceList) => {
       this.imageInterfaceList = imageInterfaceList.map((item: any) => ({
-        imageId: item.imageid,
+        imageId: item.image_id,
         source: item.source,
         downloads: item.downloads,
         width: item.width,
