@@ -26,7 +26,7 @@ export class ImagesComponent implements OnInit {
 
   ngOnInit() {
     this.imageService.getSignedImageUrl(this.imageInterface.source).subscribe(response => {
-      this.signedUrl = response.signedUrl + '&size=small'; //TODO size als query in der url
+      this.signedUrl = response.signedUrl + '&size=small';
     });
   }
 }
