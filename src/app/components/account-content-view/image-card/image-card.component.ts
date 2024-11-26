@@ -23,12 +23,14 @@ export class ImageCardComponent implements OnInit{
 
   ngOnInit() {
     this.imageService.getSignedImageUrl(this.image.source).subscribe(response => {
-      this.signedUrl = response.signedUrl;
+      this.signedUrl = response.signedUrl + '&size=medium';
       let date = new Date(this.image.date);
       this.formatedDate = date.toLocaleDateString("de-DE", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
       });
     });
   }

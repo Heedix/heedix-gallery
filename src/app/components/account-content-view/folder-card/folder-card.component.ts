@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
 import {FolderService} from "../../../services/folder.service";
 import {ImageService} from "../../../services/image.service";
+import {Timestamp} from "typeorm";
 
 @Component({
   selector: 'app-folder-card',

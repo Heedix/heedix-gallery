@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
@@ -28,10 +28,13 @@ export class UploadComponent {
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
 
-      this.http.post<any>('http://localhost:3000/upload', formData).subscribe(response => {
+      this.http.post<any>('http://localhost:3000/upload', formData, {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+        })
+      }).subscribe(response => {
         this.imageUrl = response.imageUrl;
       });
     }
   }
 }
-

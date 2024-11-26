@@ -58,13 +58,13 @@
 }
 
 .visibility.public {
-  color: #20CC20;
+  color: #33AA33;
 }
 
 .visibility.not-listed {
-  color: #ffa024;
+  color: #FFAA33;
 }
 
 .visibility.private {
-  color: #CC2020;
+  color: #AA3333;
 }
