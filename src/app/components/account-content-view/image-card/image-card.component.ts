@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgClass, NgOptimizedImage} from "@angular/common";
+import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
 import {ImageService} from "../../../services/image.service";
 
 @Component({
@@ -7,7 +7,8 @@ import {ImageService} from "../../../services/image.service";
   standalone: true,
   imports: [
     NgOptimizedImage,
-    NgClass
+    NgClass,
+    NgIf
   ],
   templateUrl: './image-card.component.html',
   styleUrl: './image-card.component.css'
