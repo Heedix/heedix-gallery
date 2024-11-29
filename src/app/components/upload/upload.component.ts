@@ -28,7 +28,7 @@ export class UploadComponent {
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
 
-      this.http.post<any>('http://localhost:3000/upload', formData, {
+      this.http.post<any>('http://localhost:3000/api/upload', formData, {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + localStorage.getItem('authToken')
         })

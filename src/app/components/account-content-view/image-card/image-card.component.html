@@ -1,4 +1,4 @@
-<div class="card-container">
+<div *ngIf="signedUrl" class="card-container">
   <div class="image-thumbnail-container">
     <img class="image-thumbnail" ngSrc="{{signedUrl}}" width="300" height="400" alt=""/>
   </div>

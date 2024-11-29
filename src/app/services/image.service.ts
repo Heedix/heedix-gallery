@@ -10,7 +10,7 @@ import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
 })
 export class ImageService {
 
-  baseUrl = 'http://localhost:3000'
+  baseUrl = 'http://localhost:3000/api';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -28,7 +28,7 @@ export class ImageService {
   }
 
   public async getAccountImages(): Promise<folderOrImageInterface[]> {
-    const response = await fetch(`${this.baseUrl}/api/account/images`, {
+    const response = await fetch(`${this.baseUrl}/account/images`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + localStorage.getItem('authToken')
@@ -46,7 +46,7 @@ export class ImageService {
   }
 
   public getSignedImageUrl(source: string) {
-    return this.http.get<{ signedUrl: string }>(this.baseUrl + `/api/getSignedImageUrl/${source}`, this.httpOptions).pipe(
+    return this.http.get<{ signedUrl: string }>(this.baseUrl + `/getSignedImageUrl/${source}`, this.httpOptions).pipe(
       //tap(response => console.log(response))
     );
   }

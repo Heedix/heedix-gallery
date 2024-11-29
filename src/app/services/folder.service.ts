@@ -6,12 +6,12 @@ import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
 })
 export class FolderService {
 
-  baseUrl = 'http://localhost:3000'
+  baseUrl = 'http://localhost:3000/api'
 
   constructor() { }
 
   public async getAccountFolders(): Promise<folderOrImageInterface[]> {
-    const response = await fetch(`${this.baseUrl}/api/account/folders`, {
+    const response = await fetch(`${this.baseUrl}/account/folders`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + localStorage.getItem('authToken')
