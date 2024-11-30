@@ -14,14 +14,12 @@
         <img class="list-icons" ngSrc="assets/icons/login-gray.svg" alt="" height="32" width="32">
         Account
       </a>
-      <hr class="list-spacer">
     </li>
     <li *ngIf="isLoggedIn">
       <a href="/account/settings">
         <img class="list-icons" ngSrc="assets/icons/settings-gray.svg" alt="" height="32" width="32">
         Settings
       </a>
-      <hr class="list-spacer">
     </li>
     <li *ngIf="!isLoggedIn">
       <a href="/login">
@@ -30,6 +28,7 @@
       </a>
     </li>
     <li *ngIf="isLoggedIn">
+      <hr class="list-spacer">
       <a (click)="logout()" href="/">
         <img class="list-icons" ngSrc="assets/icons/logout-gray.svg" alt="" height="32" width="32">
         Logout
