@@ -1,6 +1,6 @@
 .list-spacer {
   width: 80%;
-  border-color: #707070;
+  border: #949494 1px solid;
 }
 
 .sidebar {
@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #252525;
+  background-color: #353535;
   padding-top: 20px;
   filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
   transition: width 0.3s;
