@@ -1,6 +1,7 @@
 .list-spacer {
   width: 80%;
   border: #949494 1px solid;
+  border-radius: 1px;
 }
 
 .sidebar {
