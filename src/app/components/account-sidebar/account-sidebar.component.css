@@ -1,19 +1,21 @@
 .list-spacer {
   width: 80%;
-  border-color: #707070;
+  border: #949494 1px solid;
 }
 
 .account-sidebar {
-  height: 100vh;
+  height: fit-content;
   width: 250px;
+  margin: 20px;
   position: fixed;
   top: 0;
   right: 0;
   padding-top: 7px;
-  background-color: #252525;
+  background-color: #353535;
   filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
   transition: width 0.3s;
   z-index: 900;
+  border-radius: 12px;
 }
 
 .account-sidebar.collapsed {
@@ -58,23 +60,24 @@
 
 .toggle-button {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 30px;
+  right: 30px;
   width: fit-content;
   color: #FFF;
   padding: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: translate 0.3s;
   z-index: 910;
 }
 
 .toggle-button img {
   border-radius: 50%;
-  background-color: #252525;
+  background-color: #353535;
 }
 
 .toggle-button.expanded {
-  right: 185px;
+  translate: -156px;
+  top: 10px;
 }
 
 .main-content {
