@@ -72,7 +72,7 @@
 
 .toggle-button img {
   border-radius: 50%;
-  background-color: transparent;
+  background-color: #353535;
 }
 
 .toggle-button.expanded {
