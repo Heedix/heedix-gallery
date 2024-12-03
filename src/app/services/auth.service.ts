@@ -36,6 +36,20 @@ export class AuthService {
     return null;
   }
 
+  async emailVerified(): Promise<boolean> {
+    const response = await fetch(`${API_URL}/auth/email-verified`, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem('authToken')
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data.verificationStatus;
+    }
+    return false;
+  }
+
   logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');

@@ -12,7 +12,9 @@
     </label>
   </div>
 </div>
-<div class="items-grid">
+<div class="items-grid" [ngClass]="{
+        'single-item':  getItemCount() == 1,
+        'two-items': getItemCount() == 2}">
   <div class="folders-grid-items" *ngFor="let item of filteredItems">
     <app-folder-card *ngIf="folderViewShown" [folder] = "item"></app-folder-card>
     <app-image-card *ngIf="!folderViewShown" [image] = "item"></app-image-card>
