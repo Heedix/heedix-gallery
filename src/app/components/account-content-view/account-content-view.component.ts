@@ -8,6 +8,7 @@ import {ImageService} from "../../services/image.service";
 import {FolderService} from "../../services/folder.service";
 import {ImageCardComponent} from "./image-card/image-card.component";
 import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
+import {AddImageFolderCardComponent} from "./add-image-folder-card/add-image-folder-card.component";
 
 @Component({
   selector: 'app-account-content-view',
@@ -20,7 +21,8 @@ import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.compon
     ImageCardComponent,
     AccountSidebarComponent,
     NgStyle,
-    NgClass
+    NgClass,
+    AddImageFolderCardComponent
   ],
   templateUrl: './account-content-view.component.html',
   styleUrl: './account-content-view.component.css'
@@ -30,6 +32,7 @@ export class AccountContentViewComponent implements OnInit {
   filteredItems: folderOrImageInterface[] = [];
   folderViewShown = true;
   isEmailVerified = false;
+  imageCount = 0;
   query = '';
 
   folders: folderOrImageInterface[] = []
@@ -47,6 +50,7 @@ export class AccountContentViewComponent implements OnInit {
         item.date.toLowerCase().includes(query.toLowerCase())
       );
     }
+    this.updateItemCount();
   }
 
   onToggleFolderImage() {
@@ -60,15 +64,15 @@ export class AccountContentViewComponent implements OnInit {
     }
   }
 
-  getItemCount() {
-    return this.filteredItems.length + (this.isEmailVerified ? 1 : 0);
+  updateItemCount() {
+    this.imageCount = this.filteredItems.length + (this.isEmailVerified ? 1 : 0);
   }
 
   async ngOnInit() {
     this.folders = await this.folderService.getAccountFolders();
     this.images = await this.imageService.getAccountImages();
     this.items = this.folders;
-    this.onSearch(this.query);
     this.isEmailVerified = await this.authService.emailVerified();
+    this.onSearch(this.query);
   }
 }
