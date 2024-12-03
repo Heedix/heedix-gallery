@@ -1,0 +1,37 @@
+* {
+  color: #FFF;
+  text-align: center;
+}
+
+h1 {
+  font-size: 175px;
+  margin: 0;
+  font-weight: lighter;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: normal;
+}
+
+.card {
+  width: 400px;
+  height: 400px;
+  max-width: 90vw;
+  background-color: #909090;
+  border-radius: 12px;
+}
+
+.card:hover {
+  background-color: #808080;
+}
+
+.plus-icon-container {
+  height: 50%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.add-item-text {
+  text-align: center;
+}

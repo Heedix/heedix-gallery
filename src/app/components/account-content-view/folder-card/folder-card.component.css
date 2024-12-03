@@ -13,6 +13,10 @@
   filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
 }
 
+.card-container:hover {
+  background-color: #808080;
+}
+
 .folder-thumbnail-container {
   display: flex;
   align-items: center;

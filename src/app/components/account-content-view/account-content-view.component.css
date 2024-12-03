@@ -5,8 +5,12 @@
   margin: auto;
 }
 
-.folders-grid-items {
+.grid-items {
   width: fit-content;
+}
+
+.grid-items:hover {
+  cursor: pointer;
 }
 
 .top-bar-container {

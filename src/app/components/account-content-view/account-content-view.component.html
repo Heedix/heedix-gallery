@@ -13,9 +13,13 @@
   </div>
 </div>
 <div class="items-grid" [ngClass]="{
-        'single-item':  getItemCount() == 1,
-        'two-items': getItemCount() == 2}">
-  <div class="folders-grid-items" *ngFor="let item of filteredItems">
+        'single-item':  imageCount == 1,
+        'two-items': imageCount == 2}">
+  <div class="grid-items" *ngIf="isEmailVerified">
+    <app-add-image-folder-card *ngIf="folderViewShown" [itemType] = "'folder'"></app-add-image-folder-card>
+    <app-add-image-folder-card *ngIf="!folderViewShown" [itemType] = "'image'"></app-add-image-folder-card>
+  </div>
+  <div class="grid-items" *ngFor="let item of filteredItems">
     <app-folder-card *ngIf="folderViewShown" [folder] = "item"></app-folder-card>
     <app-image-card *ngIf="!folderViewShown" [image] = "item"></app-image-card>
   </div>
