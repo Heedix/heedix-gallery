@@ -1,6 +1,5 @@
 .items-grid {
   display: grid;
-  grid-template-columns: auto auto auto;
   grid-gap: 20px;
   width: fit-content;
   margin: auto;
@@ -90,4 +89,34 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+@media (min-width: 440px) {
+  .items-grid {
+    grid-template-columns: auto;
+  }
+}
+
+@media (min-width: 880px) {
+  .items-grid {
+    grid-template-columns: auto auto;
+  }
+
+  .items-grid.single-item {
+    grid-template-columns: auto;
+  }
+}
+
+@media (min-width: 1300px) {
+  .items-grid {
+    grid-template-columns: auto auto auto;
+  }
+
+  .items-grid.single-item {
+    grid-template-columns: auto;
+  }
+
+  .items-grid.two-items {
+    grid-template-columns: auto auto;
+  }
 }
