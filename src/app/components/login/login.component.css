@@ -24,6 +24,21 @@ button:active {
   transform: translateY(1px);
 }
 
+button:disabled {
+  cursor: default;
+  background-color: #6080AA;
+  transform: none;
+}
+
+button:disabled:hover {
+  background-color: #6080AA;
+}
+
+button:disabled:active {
+  background-color: #6080AA;
+  transform: none;
+}
+
 input:focus,
 select:focus,
 textarea:focus,
