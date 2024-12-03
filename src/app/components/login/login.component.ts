@@ -66,6 +66,14 @@ export class LoginComponent {
     this.infoMessage = '';
   }
 
+  isFormValid(): boolean {
+    if (this.isRegisterShown) {
+      return this.email.trim() !== '' && this.username.trim() !== '' && this.password.trim() !== '' && this.repeatPassword.trim() !== '';
+    } else {
+      return this.username.trim() !== '' && this.password.trim() !== '';
+    }
+  }
+
   onSubmit() {
     this.email = this.email.trim();
     this.username = this.username.trim();
@@ -162,17 +170,4 @@ export class LoginComponent {
     }
     return result || 'valid';
   }
-/*
-  ngOnInit() {
-    this.authService.authenticate().subscribe(
-      (response) => {
-        console.log('Secured Content:', response);
-      },
-      (error) => {
-        console.error('Failed to access secured content:', error);
-      }
-    );
-  }
-*/
- // protected readonly repeat = repeat;
 }
