@@ -11,7 +11,7 @@ import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.compon
 import {AddImageFolderCardComponent} from "./add-image-folder-card/add-image-folder-card.component";
 
 @Component({
-  selector: 'app-account-content-view',
+  selector: 'app-dashboard',
   standalone: true,
   imports: [
     FolderCardComponent,
@@ -24,10 +24,10 @@ import {AddImageFolderCardComponent} from "./add-image-folder-card/add-image-fol
     NgClass,
     AddImageFolderCardComponent
   ],
-  templateUrl: './account-content-view.component.html',
-  styleUrl: './account-content-view.component.css'
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
-export class AccountContentViewComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   items: folderOrImageInterface[] = [];
   filteredItems: folderOrImageInterface[] = [];
   folderViewShown = true;

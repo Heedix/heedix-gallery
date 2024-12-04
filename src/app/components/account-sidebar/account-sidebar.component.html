@@ -10,6 +10,12 @@
       <hr class="list-spacer">
     </li>
     <li *ngIf="isLoggedIn">
+      <a href="/dashboard">
+        <img class="list-icons" ngSrc="assets/icons/dashboard-gray.svg" alt="" height="32" width="32">
+        Dashboard
+      </a>
+    </li>
+    <li *ngIf="isLoggedIn">
       <a href="/account">
         <img class="list-icons" ngSrc="assets/icons/login-gray.svg" alt="" height="32" width="32">
         Account

@@ -109,8 +109,6 @@ select:-webkit-autofill:focus {
   border-style: none;
 }
 
-.input-field {}
-
 .input-field::placeholder {
   color: #E0E0E0;
 }

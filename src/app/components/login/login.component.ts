@@ -104,7 +104,7 @@ export class LoginComponent {
           this.showInfo('login successful', 'info');
           localStorage.setItem('authToken', response.token);
           localStorage.setItem('username', response.username);
-          setTimeout(() => this.router.navigate(['/account']), 1000);
+          setTimeout(() => this.router.navigate(['/dashboard']), 1000);
         },
         (error) => this.handleError(error)
       );
