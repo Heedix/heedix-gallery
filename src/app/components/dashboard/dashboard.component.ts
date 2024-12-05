@@ -9,6 +9,7 @@ import {FolderService} from "../../services/folder.service";
 import {ImageCardComponent} from "./image-card/image-card.component";
 import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
 import {AddImageFolderCardComponent} from "./add-image-folder-card/add-image-folder-card.component";
+import {AddImageComponent} from "./add-image/add-image.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +23,8 @@ import {AddImageFolderCardComponent} from "./add-image-folder-card/add-image-fol
     AccountSidebarComponent,
     NgStyle,
     NgClass,
-    AddImageFolderCardComponent
+    AddImageFolderCardComponent,
+    AddImageComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

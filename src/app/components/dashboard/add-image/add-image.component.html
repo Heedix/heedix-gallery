@@ -1,0 +1,71 @@
+<div class="background">
+  <div class="add-image-container">
+    <form class="form">
+      <div class="info-grid">
+        <div>
+          <input type="text" id="name" class="input-field" [(ngModel)]="name" name="username" placeholder="Name" required />
+        </div>
+        <div>
+          <select class="selectors" id="visibility" [(ngModel)]="visibility">
+            <option value="public">Public</option>
+            <option value="not-listed">Not-Listed</option>
+            <option value="private">Private</option>
+          </select>
+        </div>
+        <div>
+          <input type="number" id="width" class="input-field" [(ngModel)]="width" name="width" placeholder="width" disabled required />
+        </div>
+        <div>
+          <input type="number" id="height" class="input-field" [(ngModel)]="height" name="height" placeholder="height" disabled required />
+        </div>
+        <div>
+          <input type="number" id="size" class="input-field" [(ngModel)]="size" name="size" placeholder="size" disabled required />
+        </div>
+        <div>
+          <input type="datetime-local" id="upload-date" class="input-field" [(ngModel)]="uploadDate" name="upload-date" placeholder="Upload Date" disabled required />
+        </div>
+        <div>
+          <input type="datetime-local" id="creation-date" class="input-field" [(ngModel)]="creationDate" name="creation-date" placeholder="Creation Date" disabled/>
+        </div>
+        <div>
+          <input type="text" id="bits-per-pixel" class="input-field" [(ngModel)]="bitsPerPixel" name="bits-per-pixel" placeholder="Bits Per Pixel" disabled/>
+        </div>
+        <div>
+          <input type="text" id="color-space" class="input-field" [(ngModel)]="colorSpace" name="color-space" placeholder="Color Space" disabled/>
+        </div>
+        <div>
+          <input type="text" id="white-balance" class="input-field" [(ngModel)]="whiteBalance" name="white-balance" placeholder="White Balance" disabled/>
+        </div>
+        <div>
+          <input type="text" id="make" class="input-field" [(ngModel)]="make" name="make" placeholder="Make" disabled/>
+        </div>
+        <div>
+          <input type="text" id="model" class="input-field" [(ngModel)]="model" name="model" placeholder="Model" disabled/>
+        </div>
+        <div>
+          <input type="text" id="lens-model" class="input-field" [(ngModel)]="lensModel" name="lens-model" placeholder="Lens Model" disabled/>
+        </div>
+        <div>
+          <input type="text" id="exposure-time" class="input-field" [(ngModel)]="exposureTime" name="exposure-time" placeholder="Exposure Time" disabled/>
+        </div>
+        <div>
+          <input type="text" id="iso" class="input-field" [(ngModel)]="iso" name="iso" placeholder="ISO" disabled/>
+        </div>
+        <div>
+          <input type="text" id="aperture" class="input-field" [(ngModel)]="aperture" name="aperture" placeholder="Aperture" disabled/>
+        </div>
+        <div>
+          <input type="text" id="focal-length" class="input-field" [(ngModel)]="focalLength" name="focal-length" placeholder="Focal Length" disabled/>
+        </div>
+        <div>
+          <input type="text" id="focal-length-equivalent" class="input-field" [(ngModel)]="focalLengthEquivalent" name="focal-length-equivalent" placeholder="Focal Length Equivalent" disabled/>
+        </div>
+      </div>
+      <div class="preview-submit-container">
+        <div class="image-preview-container">
+          <img class="image-preview" ngSrc="assets/images/bild3.jpg" width="500" height="4867" alt="Image Preview">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
