@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.actor | toLowerCase}}/heedix-gallery:latest
+  IMAGE_NAME: heedix/heedix-gallery:latest
 
 jobs:
 
