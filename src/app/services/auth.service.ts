@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import CryptoJS from 'crypto-js';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'http://heedix.de:3000/api';
 
 @Injectable({
   providedIn: 'root'
