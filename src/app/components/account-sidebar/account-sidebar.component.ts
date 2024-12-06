@@ -16,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
 export class AccountSidebarComponent implements OnInit {
   constructor(private authService: AuthService) {
   }
-  baseUrl = 'http://localhost:3000/api/account/profile-picture/'; //TODO: Change to production URL
+  baseUrl = 'http://heedix.de:3000/api/account/profile-picture/'; //TODO: Change to production URL
 
   isSidebarCollapsed = true;
   isLoggedIn = false;

@@ -35,7 +35,7 @@ export class VerifyEmailComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       this.token = params.get('token');
       if (this.token) {
-        this.http.get('http://localhost:3000/api/verify?token=' + this.token).subscribe( //TODO: Change to your server
+        this.http.get('http://heedix.de:3000/api/verify?token=' + this.token).subscribe( //TODO: Change to your server
           () => {
             this.notification('Verification successful!', 'info')
             setTimeout(() => this.router.navigate(['/']), 5000);

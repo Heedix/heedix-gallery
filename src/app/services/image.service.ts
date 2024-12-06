@@ -10,7 +10,7 @@ import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
 })
 export class ImageService {
 
-  baseUrl = 'http://localhost:3000/api';
+  baseUrl = 'http://heedix.de:3000/api';
 
   httpOptions = {
     headers: new HttpHeaders({
