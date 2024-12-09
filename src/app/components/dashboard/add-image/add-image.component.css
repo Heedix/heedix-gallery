@@ -39,7 +39,7 @@ select:-webkit-autofill:focus {
 .add-image-container {
   position: fixed;
   width: 90vw;
-  max-width: 1620px;
+  max-width: 1500px;
   height: fit-content;
   display: flex;
   flex-direction: row;
@@ -50,16 +50,20 @@ select:-webkit-autofill:focus {
 }
 
 .form{
-  display: flex;
+  /*display: flex;
   align-items: center;
+  justify-content: space-between;*/
   width: 100%;
-  justify-content: space-between;
+  display: grid;
+  gap: 100px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 900px;
+  width: 100%;
+  gap: 30px 10%;
 }
 
 .info-grid div {
@@ -67,7 +71,7 @@ select:-webkit-autofill:focus {
 }
 
 .input-field {
-  width: 90%;
+  width: 100%;
   max-width: 90vw;
   height: 50px;
   background-color: #909090;
@@ -85,7 +89,7 @@ select:-webkit-autofill:focus {
 }
 
 .selectors {
-  width: 90%;
+  width: 105%;
   max-width: 90vw;
   height: 50px;
   background-color: #909090;
@@ -99,7 +103,7 @@ select:-webkit-autofill:focus {
 }
 
 .image-preview {
-  width: 90%;
+  width: 100%;
   max-width: 500px;
   height: auto;
   max-height: 90vh;

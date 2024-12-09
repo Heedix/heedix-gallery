@@ -15,21 +15,23 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 })
 export class AddImageComponent {
   name = '';
-  width = 0;
-  height = 0;
-  size = 0;
-  uploadDate =  new Date();
-  creationDate: Date | undefined;
-  bitsPerPixel = 0;
-  colorSpace = '';
-  whiteBalance = '';
   visibility = 'not-listed';
+  width = 0;
   make = '';
+  height = 0;
   model = '';
+  size = 0;
   lensModel = '';
+  uploadDate =  new Date().toISOString().slice(0, 16);
   exposureTime = '';
+  creationDate: Date | undefined;
   iso = '';
+  bitsPerPixel = 0;
   aperture = '';
+  colorSpace = '';
   focalLength = '';
+  whiteBalance = '';
   focalLengthEquivalent = '';
+
+
 }
