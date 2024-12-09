@@ -1,6 +1,31 @@
 <div class="background">
   <div class="add-image-container">
-    <form class="form">
+    <div
+      class="dropzone"
+      *ngIf="!selectedFile"
+      [class.dragged-over]="draggedOver"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave()"
+      (drop)="onDrop($event)"
+      (click)="triggerFileInput()"
+    >
+      <div class="dropzone-content">
+        <div>
+          <img ngSrc="assets/images/drop-image-gray.svg" alt="Upload Icon" width="500" height="500"/>
+        </div>
+        <div class="dropzone-text">
+          <p>Drop your image here</p>
+        </div>
+      </div>
+    </div>
+    <input
+      class="hidden-input"
+      type="file"
+      accept="image/*"
+      #fileInput
+      (change)="onFileSelected($event)"
+    />
+    <form class="form" *ngIf="selectedFile">
       <div class="info-grid">
         <div>
           <input type="text" id="name" class="input-field" [(ngModel)]="name" name="username" placeholder="Name" required />
@@ -63,7 +88,8 @@
       </div>
       <div class="preview-submit-container">
         <div class="image-preview-container">
-          <img class="image-preview" ngSrc="assets/images/bild3.jpg" width="500" height="4867" alt="Image Preview">
+          <img *ngIf="previewSrc" [src]="previewSrc" class="image-preview" alt="Image Preview">
+          <p *ngIf="!previewSrc">Kein Bild ausgewählt</p>
         </div>
       </div>
     </form>
