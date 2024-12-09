@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://heedix.de.de/api'
+  apiUrl: 'https://api.heedix.de.de/v1'
 };
