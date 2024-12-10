@@ -30,6 +30,7 @@ import {AddImageComponent} from "./add-image/add-image.component";
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+  addItemClosed = true;
   items: folderOrImageInterface[] = [];
   filteredItems: folderOrImageInterface[] = [];
   folderViewShown = true;
@@ -68,6 +69,14 @@ export class DashboardComponent implements OnInit {
 
   updateItemCount() {
     this.imageCount = this.filteredItems.length + (this.isEmailVerified ? 1 : 0);
+  }
+
+  openAddImage() {
+    this.addItemClosed = false;
+  }
+
+  addItemShownChange(newState: boolean) {
+    this.addItemClosed = newState;
   }
 
   async ngOnInit() {

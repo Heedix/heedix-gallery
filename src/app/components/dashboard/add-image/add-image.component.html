@@ -1,5 +1,5 @@
-<div class="background">
-  <div class="add-image-container">
+<div class="background" *ngIf="!componentClosed" (click)="closeComponent()">
+  <div class="add-image-container" (click)="$event.stopPropagation()">
     <div
       class="dropzone"
       *ngIf="!selectedFile"
@@ -68,10 +68,10 @@
           <input type="text" id="iso" class="input-field" [(ngModel)]="iso" name="iso" placeholder="ISO" disabled/>
         </div>
         <div>
-          <input type="text" id="bits-per-pixel" class="input-field" [(ngModel)]="bitsPerPixel" name="bits-per-pixel" placeholder="Bits Per Pixel" disabled/>
+          <input type="text" id="bits-per-sample" class="input-field" [(ngModel)]="bitsPerSample" name="bits-per-sample" placeholder="Bits Per Sample" disabled/>
         </div>
         <div>
-          <input type="text" id="aperture" class="input-field" [(ngModel)]="aperture" name="aperture" placeholder="Aperture" disabled/>
+          <input type="text" id="aperture" class="input-field" [(ngModel)]="fNumber" name="aperture" placeholder="Aperture" disabled/>
         </div>
         <div>
           <input type="text" id="color-space" class="input-field" [(ngModel)]="colorSpace" name="color-space" placeholder="Color Space" disabled/>
@@ -89,8 +89,9 @@
       <div class="preview-submit-container">
         <div class="image-preview-container">
           <img *ngIf="previewSrc" [src]="previewSrc" class="image-preview" alt="Image Preview">
-          <p *ngIf="!previewSrc">Kein Bild ausgewählt</p>
+          <p *ngIf="!previewSrc">Preview not available</p>
         </div>
+        <button type="submit" class="submit-button" (click)="onSubmit()">Submit</button>
       </div>
     </form>
   </div>
