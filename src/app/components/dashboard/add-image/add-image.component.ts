@@ -93,6 +93,7 @@ export class AddImageComponent {
     let requestData = [
       {key: 'height', tag: 'Image Height', method: 'value'},
       {key: 'width', tag: 'Image Width', method: 'value'},
+      {key: 'creationDate', tag: 'CreateDate', method: 'description'},
       {key: 'bitsPerSample', tag: 'Bits Per Sample', method: 'description'},
       {key: 'make', tag: 'Make', method: 'description'},
       {key: 'model', tag: 'Model', method: 'description'},
@@ -129,15 +130,12 @@ export class AddImageComponent {
         extractedData[key.key] = null;
       }
     }
-    try {
-      extractedData['dateTimeOriginal'] = extractedData['dateTimeOriginal'].replace(/:/g, '-');
-    } catch (error) {
-    }
 
     this.name = file.name;
     this.height = extractedData['height'] || undefined;
     this.width = extractedData['width'] || undefined;
     this.size = extractedData['fileSize'] || undefined;
+    this.creationDate = extractedData['creationDate'] ? new Date(extractedData['creationDate']).toISOString().slice(0, 19) : undefined;
     this.bitsPerSample = extractedData['bitsPerSample'] || undefined;
     this.make = extractedData['make'] || undefined;
     this.model = extractedData['model'] || undefined;
@@ -149,7 +147,6 @@ export class AddImageComponent {
     this.focalLength = extractedData['focalLength'] || undefined;
     this.focalLengthEquivalent = extractedData['focalLengthIn35mmFilm'] || undefined;
     this.lensModel = extractedData['lensModel'] || undefined;
-    this.creationDate = extractedData['dateTimeOriginal'] ? new Date(extractedData['dateTimeOriginal']).toISOString().slice(0, 16) : undefined;
 
     return extractedData;
 
@@ -158,6 +155,7 @@ export class AddImageComponent {
   closeComponent() {
     this.componentClosed = true;
     this.stateChanged.emit(this.componentClosed);
+    this.selectedFile = null;
   }
 
   onSubmit() {
