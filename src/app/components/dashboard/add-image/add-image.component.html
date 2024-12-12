@@ -11,7 +11,7 @@
     >
       <div class="dropzone-content">
         <div>
-          <img ngSrc="assets/images/drop-image-gray.svg" alt="Upload Icon" width="500" height="500"/>
+          <img ngSrc="assets/images/drop-image-gray.svg" alt="Upload Icon" width="500" height="500" (dragstart)="disableDrag($event)"/>
         </div>
         <div class="dropzone-text">
           <p>Drop your image here</p>
@@ -32,9 +32,9 @@
         </div>
         <div>
           <select class="selectors" id="visibility" [(ngModel)]="visibility">
-            <option value="public">Public</option>
-            <option value="not-listed">Not-Listed</option>
-            <option value="private">Private</option>
+            <option value="Public">Public</option>
+            <option value="Not-Listed">Not-Listed</option>
+            <option value="Private">Private</option>
           </select>
         </div>
         <div>

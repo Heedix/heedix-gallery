@@ -1,8 +1,10 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import path from "path";
 import ExifReader from 'exifreader';
+import {environment} from "../../../environments/environment";
+
+const API_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-add-image',
@@ -24,7 +26,7 @@ export class AddImageComponent {
   selectedFile: File | null = null;
 
   name: string | undefined;
-  visibility = 'not-listed';
+  visibility = 'Not-Listed';
   width: number | undefined;
   make: string | undefined;
   height: number | undefined;
@@ -89,7 +91,13 @@ export class AddImageComponent {
     }
   }
 
+  getFileExtension = (filename: string): string => {
+    const dotIndex = filename.lastIndexOf('.');
+    return dotIndex !== -1 ? filename.slice(dotIndex) : '';
+  };
+
   async getFileMetaData(file: File) {
+
     let requestData = [
       {key: 'height', tag: 'Image Height', method: 'value'},
       {key: 'width', tag: 'Image Width', method: 'value'},
@@ -106,29 +114,23 @@ export class AddImageComponent {
       {key: 'focalLengthIn35mmFilm', tag: 'FocalLengthIn35mmFilm', method: 'description'},
       {key: 'lensModel', tag: 'LensModel', method: 'description'}
     ];
-
     let tags;
-    try {
-      tags = await ExifReader.load(file);
-    } catch (error) {
-    }
 
     let extractedData: Record<string, any> = {};
-
-    const getFileExtension = (filename: string): string => {
-      const dotIndex = filename.lastIndexOf('.');
-      return dotIndex !== -1 ? filename.slice(dotIndex) : '';
-    };
-
-    extractedData['fileExt'] = getFileExtension(file.name);
+    extractedData['fileExt'] = this.getFileExtension(file.name);
     extractedData['fileName'] = file.name;
+
     extractedData['fileSize'] = file.size;
-    for (const key of requestData) {
-      try {
-        extractedData[key.key] = (tags as any)?.[key.tag]?.[key.method] ?? null;
-      } catch (error) {
-        extractedData[key.key] = null;
+    try {
+      tags = await ExifReader.load(file);
+      for (const key of requestData) {
+        try {
+          extractedData[key.key] = (tags as any)?.[key.tag]?.[key.method] ?? null;
+        } catch (error) {
+          extractedData[key.key] = null;
+        }
       }
+    } catch (error) {
     }
 
     this.name = file.name;
@@ -149,7 +151,10 @@ export class AddImageComponent {
     this.lensModel = extractedData['lensModel'] || undefined;
 
     return extractedData;
+  }
 
+  disableDrag(event: DragEvent): void {
+    event.preventDefault();
   }
 
   closeComponent() {
@@ -159,6 +164,41 @@ export class AddImageComponent {
   }
 
   onSubmit() {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('image', this.selectedFile);
+      formData.append('name', this.name || '');
+      formData.append('visibility', this.visibility);
+      formData.append('width', this.width?.toString() || '');
+      formData.append('height', this.height?.toString() || '');
+      formData.append('make', this.make || '');
+      formData.append('model', this.model || '');
+      formData.append('size', this.size?.toString() || '');
+      formData.append('lensModel', this.lensModel || '');
+      formData.append('uploadDate', this.uploadDate);
+      formData.append('exposureTime', this.exposureTime || '');
+      formData.append('creationDate', this.creationDate || '');
+      formData.append('iso', this.iso || '');
+      formData.append('bitsPerSample', this.bitsPerSample?.toString() || '');
+      formData.append('fNumber', this.fNumber || '');
+      formData.append('colorSpace', this.colorSpace || '');
+      formData.append('focalLength', this.focalLength || '');
+      formData.append('whiteBalance', this.whiteBalance || '');
+      formData.append('focalLengthEquivalent', this.focalLengthEquivalent || '');
 
+      fetch(`${API_URL}/upload`, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+        },
+        body: formData
+      }).then(response => {
+        if (response.status === 200) {
+          this.closeComponent();
+        } else {
+          alert('Upload fehlgeschlagen');
+        }
+      });
+    }
   }
 }

@@ -124,6 +124,10 @@ button:active {
   border-style: none;
 }
 
+.input-field:disabled {
+  color: #BBB;
+}
+
 .input-field::placeholder {
   color: rgba(170, 170, 170, 0.67);
 }
