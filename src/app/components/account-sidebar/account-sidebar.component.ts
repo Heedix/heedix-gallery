@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
 import { AuthService } from '../../services/auth.service';
+import { environment } from '../../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-account-sidebar',
@@ -16,7 +19,6 @@ import { AuthService } from '../../services/auth.service';
 export class AccountSidebarComponent implements OnInit {
   constructor(private authService: AuthService) {
   }
-  baseUrl = 'http://heedix.de:3000/api/account/profile-picture/'; //TODO: Change to production URL
 
   isSidebarCollapsed = true;
   isLoggedIn = false;
@@ -40,7 +42,7 @@ export class AccountSidebarComponent implements OnInit {
       const extensions = ['.jpg', '.png'];
       this.username = localStorage.getItem('username');
       for (const ext of extensions) {
-        const url = `${this.baseUrl}${this.userId}${ext}`;
+        const url = `${API_URL}/account/profile-picture/${this.userId}${ext}`;
         if (await this.imageExists(url)) {
           this.profilePictureUrl = url;
           break;

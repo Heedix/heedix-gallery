@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
+import {environment} from "../environments/environment";
+
+const API_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
 })
 export class FolderService {
 
-  baseUrl = 'http://heedix.de:3000/api'
-
-  constructor() { }
+  constructor() {
+  }
 
   public async getAccountFolders(): Promise<folderOrImageInterface[]> {
-    const response = await fetch(`${this.baseUrl}/account/folders`, {
+    const response = await fetch(`${API_URL}/account/folders`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + localStorage.getItem('authToken')

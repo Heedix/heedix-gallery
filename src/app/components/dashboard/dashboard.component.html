@@ -1,3 +1,6 @@
+<div>
+  <app-add-image [componentClosed] = addItemClosed (stateChanged)="addItemShownChange($event)" (imageAdded)="reFetchImages()"></app-add-image>
+</div>
 <div class="account-sidebar-container">
   <app-account-sidebar></app-account-sidebar>
 </div>
@@ -15,7 +18,7 @@
 <div class="items-grid" [ngClass]="{
         'single-item':  imageCount == 1,
         'two-items': imageCount == 2}">
-  <div class="grid-items" *ngIf="isEmailVerified">
+  <div class="grid-items" *ngIf="isEmailVerified" (click)="openAddImage()">
     <app-add-image-folder-card *ngIf="folderViewShown" [itemType] = "'folder'"></app-add-image-folder-card>
     <app-add-image-folder-card *ngIf="!folderViewShown" [itemType] = "'image'"></app-add-image-folder-card>
   </div>

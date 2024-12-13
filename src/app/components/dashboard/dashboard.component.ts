@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FolderCardComponent} from "./folder-card/folder-card.component";
-import {NgClass, NgForOf, NgIf, NgStyle} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {SearchbarComponent} from "../searchbar/searchbar.component";
 import {folderOrImageInterface} from "../../interfaces/folderOrImageInterface";
 import {AuthService} from "../../services/auth.service";
@@ -9,6 +9,7 @@ import {FolderService} from "../../services/folder.service";
 import {ImageCardComponent} from "./image-card/image-card.component";
 import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
 import {AddImageFolderCardComponent} from "./add-image-folder-card/add-image-folder-card.component";
+import {AddImageComponent} from "./add-image/add-image.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -20,14 +21,15 @@ import {AddImageFolderCardComponent} from "./add-image-folder-card/add-image-fol
     NgIf,
     ImageCardComponent,
     AccountSidebarComponent,
-    NgStyle,
     NgClass,
-    AddImageFolderCardComponent
+    AddImageFolderCardComponent,
+    AddImageComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+  addItemClosed = true;
   items: folderOrImageInterface[] = [];
   filteredItems: folderOrImageInterface[] = [];
   folderViewShown = true;
@@ -66,6 +68,22 @@ export class DashboardComponent implements OnInit {
 
   updateItemCount() {
     this.imageCount = this.filteredItems.length + (this.isEmailVerified ? 1 : 0);
+  }
+
+  openAddImage() {
+    this.addItemClosed = false;
+  }
+
+  addItemShownChange(newState: boolean) {
+    this.addItemClosed = newState;
+  }
+
+  async reFetchImages() {
+    this.images = await this.imageService.getAccountImages();
+  }
+
+  async reFetchFolders() {
+    this.folders = await this.folderService.getAccountFolders();
   }
 
   async ngOnInit() {

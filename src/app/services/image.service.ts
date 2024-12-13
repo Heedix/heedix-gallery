@@ -4,13 +4,15 @@ import {map, Observable, tap} from "rxjs";
 import {response} from "express";
 import {ImageInterface} from "../interfaces/ImageInterface";
 import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
+import {environment} from "../environments/environment";
+
+const API_URL = environment.apiUrl;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
-
-  baseUrl = 'http://heedix.de:3000/api';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -22,13 +24,13 @@ export class ImageService {
   constructor(private http: HttpClient) { }
 
   public getImages() {
-    return this.http.get<any>(`${this.baseUrl}/images`, this.httpOptions).pipe(
+    return this.http.get<any>(`${API_URL}/images`, this.httpOptions).pipe(
       //tap(response => console.log(response))
     );
   }
 
   public async getAccountImages(): Promise<folderOrImageInterface[]> {
-    const response = await fetch(`${this.baseUrl}/account/images`, {
+    const response = await fetch(`${API_URL}/account/images`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + localStorage.getItem('authToken')
@@ -46,7 +48,7 @@ export class ImageService {
   }
 
   public getSignedImageUrl(source: string) {
-    return this.http.get<{ signedUrl: string }>(this.baseUrl + `/getSignedImageUrl/${source}`, this.httpOptions).pipe(
+    return this.http.get<{ signedUrl: string }>(API_URL + `/getSignedImageUrl/${source}`, this.httpOptions).pipe(
       //tap(response => console.log(response))
     );
   }
@@ -58,7 +60,7 @@ export class ImageService {
       })
     };
 
-    return this.http.get<any>(`${this.baseUrl}/images/${id}`, httpOptions).pipe(
+    return this.http.get<any>(`${API_URL}/images/${id}`, httpOptions).pipe(
 
       tap(response => console.log(response))
     );
