@@ -79,7 +79,7 @@ export class AddImageComponent {
 
   processFile(file: File) {
     const ext = this.getFileExtension(file.name);
-    if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {
+    if ((ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') || !file.type.startsWith('image/')) {
       alert('Please select a valid image file (Valid file types: .jpg, .jpeg, .png)');
     } else if (file.size > 5242880) {
       alert('Please select a file smaller than 5MB');
