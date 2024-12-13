@@ -79,7 +79,11 @@ export class AddImageComponent {
 
   processFile(file: File) {
     const ext = this.getFileExtension(file.name);
-    if (ext === '.jpg' || ext === '.jpeg' || ext === '.png') {
+    if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {
+      alert('Please select a valid image file (Valid file types: .jpg, .jpeg, .png)');
+    } else if (file.size > 5242880) {
+      alert('Please select a file smaller than 5MB');
+    } else {
       this.selectedFile = file;
 
       const reader = new FileReader();
@@ -88,8 +92,6 @@ export class AddImageComponent {
       };
       reader.readAsDataURL(file);
       this.getFileMetaData(file);
-    } else {
-      alert('Please select a valid image file (Valid file types: .jpg, .jpeg, .png)');
     }
   }
 
