@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {NgIf, NgOptimizedImage} from "@angular/common";
+import {environment} from "../../environments/environment";
+
+const API_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-upload',
@@ -28,7 +31,7 @@ export class UploadComponent {
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
 
-      this.http.post<any>('http://localhost:3000/api/upload', formData, {
+      this.http.post<any>(`${API_URL}/upload`, formData, {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + localStorage.getItem('authToken')
         })
