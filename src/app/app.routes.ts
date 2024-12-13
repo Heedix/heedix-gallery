@@ -9,7 +9,6 @@ import {VerifyEmailComponent} from "./components/verify-email/verify-email.compo
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'settings', component: SettingsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'verify', component: VerifyEmailComponent},
   {path: 'dashboard', component: DashboardComponent},
