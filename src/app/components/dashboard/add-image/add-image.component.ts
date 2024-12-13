@@ -20,7 +20,8 @@ const API_URL = environment.apiUrl;
 })
 export class AddImageComponent {
   @Input() componentClosed = true;
-  @Output() stateChanged = new EventEmitter<boolean>();
+  @Output() stateChanged = new EventEmitter<boolean>()
+  @Output() imageAdded = new EventEmitter;
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   selectedFile: File | null = null;
@@ -77,7 +78,8 @@ export class AddImageComponent {
   }
 
   processFile(file: File) {
-    if (file.type.startsWith('image/')) {
+    const ext = this.getFileExtension(file.name);
+    if (ext === '.jpg' || ext === '.jpeg' || ext === '.png') {
       this.selectedFile = file;
 
       const reader = new FileReader();
@@ -87,7 +89,7 @@ export class AddImageComponent {
       reader.readAsDataURL(file);
       this.getFileMetaData(file);
     } else {
-      alert('Bitte nur Bilddateien auswählen.');
+      alert('Please select a valid image file (Valid file types: .jpg, .jpeg, .png)');
     }
   }
 
@@ -149,8 +151,6 @@ export class AddImageComponent {
     this.focalLength = extractedData['focalLength'] || undefined;
     this.focalLengthEquivalent = extractedData['focalLengthIn35mmFilm'] || undefined;
     this.lensModel = extractedData['lensModel'] || undefined;
-
-    return extractedData;
   }
 
   disableDrag(event: DragEvent): void {
@@ -195,8 +195,9 @@ export class AddImageComponent {
       }).then(response => {
         if (response.status === 200) {
           this.closeComponent();
+          this.imageAdded.emit();
         } else {
-          alert('Upload fehlgeschlagen');
+          alert(response.statusText);
         }
       });
     }

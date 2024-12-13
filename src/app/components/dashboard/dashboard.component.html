@@ -1,5 +1,5 @@
 <div>
-  <app-add-image [componentClosed] = addItemClosed (stateChanged)="addItemShownChange($event)"></app-add-image>
+  <app-add-image [componentClosed] = addItemClosed (stateChanged)="addItemShownChange($event)" (imageAdded)="reFetchImages()"></app-add-image>
 </div>
 <div class="account-sidebar-container">
   <app-account-sidebar></app-account-sidebar>

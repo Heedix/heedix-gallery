@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FolderCardComponent} from "./folder-card/folder-card.component";
-import {NgClass, NgForOf, NgIf, NgStyle} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {SearchbarComponent} from "../searchbar/searchbar.component";
 import {folderOrImageInterface} from "../../interfaces/folderOrImageInterface";
 import {AuthService} from "../../services/auth.service";
@@ -21,7 +21,6 @@ import {AddImageComponent} from "./add-image/add-image.component";
     NgIf,
     ImageCardComponent,
     AccountSidebarComponent,
-    NgStyle,
     NgClass,
     AddImageFolderCardComponent,
     AddImageComponent
@@ -77,6 +76,14 @@ export class DashboardComponent implements OnInit {
 
   addItemShownChange(newState: boolean) {
     this.addItemClosed = newState;
+  }
+
+  async reFetchImages() {
+    this.images = await this.imageService.getAccountImages();
+  }
+
+  async reFetchFolders() {
+    this.folders = await this.folderService.getAccountFolders();
   }
 
   async ngOnInit() {
