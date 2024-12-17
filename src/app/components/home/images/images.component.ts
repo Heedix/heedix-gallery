@@ -21,11 +21,13 @@ export class ImagesComponent implements OnInit {
   @Input() imageInterface!: ImageInterface;
 
   signedUrl: string | null = null;
+  fullSizeUrl: string | null = null;
 
   constructor(private imageService: ImageService) {}
 
   ngOnInit() {
     this.imageService.getSignedImageUrl(this.imageInterface.source).subscribe(response => {
+      this.fullSizeUrl = response.signedUrl;
       this.signedUrl = response.signedUrl + '&size=small';
     });
   }
