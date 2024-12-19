@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
 import { AuthService } from '../../services/auth.service';
 import { environment } from '../../environments/environment';
+import {NotificationService} from "../../services/notification.service";
+import {Router} from "@angular/router";
 
 const API_URL = environment.apiUrl;
 
@@ -17,8 +19,7 @@ const API_URL = environment.apiUrl;
   styleUrl: './account-sidebar.component.css'
 })
 export class AccountSidebarComponent implements OnInit {
-  constructor(private authService: AuthService) {
-  }
+  constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) {}
 
   isSidebarCollapsed = true;
   isLoggedIn = false;
@@ -33,6 +34,8 @@ export class AccountSidebarComponent implements OnInit {
 
   logout() {
     this.authService.logout()
+    this.notificationService.addNotification( 'Logged out successfully', 'info', 5);
+    this.router.navigate(['/']).then(r => r);
   }
 
   async ngOnInit() {

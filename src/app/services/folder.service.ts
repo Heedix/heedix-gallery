@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
+import {folderOrImageInterface} from "../interfaces/FolderOrImageInterface";
 import {environment} from "../environments/environment";
 
 const API_URL = environment.apiUrl;

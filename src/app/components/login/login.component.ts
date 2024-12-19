@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
+import {NotificationService} from "../../services/notification.service";
 //import {repeat} from "rxjs";
 
 
@@ -43,7 +44,7 @@ export class LoginComponent {
   password: string = '';
   repeatPassword: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private notificationService: NotificationService) {}
 
   toggleRegisterShown(): void {
     this.isRegisterShown = !this.isRegisterShown;
@@ -90,18 +91,20 @@ export class LoginComponent {
           () => {
             this.toggleRegisterShown();
             this.clearPage();
+            this.sendNotification('Registration successful', 'success', 5);
+            this.sendNotification('Please verify your email address', 'info', -1);
           },
           (error) => this.handleError(error)
         );
       } else {
-        this.showInfo((emailValidity !== 'valid' ? emailValidity : '') +
+        this.sendNotification((emailValidity !== 'valid' ? emailValidity : '') +
           (usernameValidity !== 'valid' ? usernameValidity : '') +
-          (passwordValidity !== 'valid' ? passwordValidity : ''), 'error');
+          (passwordValidity !== 'valid' ? passwordValidity : ''), 'error', 5);
       }
     } else {
       this.authService.login(this.username, this.password).subscribe(
         (response) => {
-          this.showInfo('login successful', 'info');
+          this.sendNotification('login successful', 'success', 5);
           localStorage.setItem('authToken', response.token);
           localStorage.setItem('username', response.username);
           setTimeout(() => this.router.navigate(['/dashboard']), 1000);
@@ -114,23 +117,22 @@ export class LoginComponent {
   handleError(error: any) {
     switch (error.error.errorCode) {
       case 'EMAIL_TAKEN':
-        this.showInfo('This email is already taken.', 'error');
+        this.sendNotification('This email is already taken.', 'error', 5);
         break;
       case 'USERNAME_TAKEN':
-        this.showInfo('This username is already taken.', 'error');
+        this.sendNotification('This username is already taken.', 'error', 5);
         break;
       case 'CREDENTIALS_INVALID':
-        this.showInfo('Username or password is incorrect.', 'error');
+        this.sendNotification('Username or password is incorrect.', 'error', 5);
         break;
       default:
-        this.showInfo('Unexpected error occurred', 'error');
+        this.sendNotification('Unexpected error occurred', 'error', 5);
         console.error(error.message);
     }
   }
 
-  showInfo(message: string, type: string) {
-    this.infoType = type;
-    this.infoMessage = message;
+  sendNotification(content: string, type: string, expirationTime: number) {
+    this.notificationService.addNotification(content, type, expirationTime);
   }
 
   checkEmailValidity(email: string): string {

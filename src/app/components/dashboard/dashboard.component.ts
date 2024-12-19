@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FolderCardComponent} from "./folder-card/folder-card.component";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {SearchbarComponent} from "../searchbar/searchbar.component";
-import {folderOrImageInterface} from "../../interfaces/folderOrImageInterface";
+import {folderOrImageInterface} from "../../interfaces/FolderOrImageInterface";
 import {AuthService} from "../../services/auth.service";
 import {ImageService} from "../../services/image.service";
 import {FolderService} from "../../services/folder.service";
@@ -10,6 +10,7 @@ import {ImageCardComponent} from "./image-card/image-card.component";
 import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
 import {AddImageFolderCardComponent} from "./add-image-folder-card/add-image-folder-card.component";
 import {AddImageComponent} from "./add-image/add-image.component";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -41,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
   images: folderOrImageInterface[] = []
 
-  constructor(private imageService:ImageService, private folderService: FolderService, private authService: AuthService) {}
+  constructor(private imageService:ImageService, private folderService: FolderService, private authService: AuthService, private notificationService: NotificationService) {}
 
   onSearch(query: string) {
     if (this.items) {
@@ -80,10 +81,15 @@ export class DashboardComponent implements OnInit {
 
   async reFetchImages() {
     this.images = await this.imageService.getAccountImages();
+    this.sendNotification('Image uploaded successfully', 'success', 5);
   }
 
   async reFetchFolders() {
     this.folders = await this.folderService.getAccountFolders();
+  }
+
+  sendNotification(content: string, type: string, expirationTime: number) {
+    this.notificationService.addNotification(content, type, expirationTime);
   }
 
   async ngOnInit() {
@@ -91,6 +97,9 @@ export class DashboardComponent implements OnInit {
     this.images = await this.imageService.getAccountImages();
     this.items = this.folders;
     this.isEmailVerified = await this.authService.emailVerified();
+    if (!this.isEmailVerified) {
+      this.sendNotification('Please verify your email to upload images', 'warning', -1);
+    }
     this.onSearch(this.query);
   }
 }

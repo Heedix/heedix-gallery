@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
 import {response} from "express";
 import {ImageInterface} from "../interfaces/ImageInterface";
-import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
+import {folderOrImageInterface} from "../interfaces/FolderOrImageInterface";
 import {environment} from "../environments/environment";
 
 const API_URL = environment.apiUrl;
