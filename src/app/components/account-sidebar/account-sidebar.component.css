@@ -12,7 +12,8 @@
   top: 0;
   right: 0;
   padding-top: 7px;
-  background-color: #353535;
+  background-color: #353535BF;
+  backdrop-filter: blur(25px);
   filter: drop-shadow( 5px 5px 3px rgba(0, 0, 0, 0.5));
   transition: width 0.3s;
   z-index: 900;
@@ -23,6 +24,7 @@
   width: 0;
   overflow: hidden;
   filter: none;
+  backdrop-filter: none;
 }
 
 .account-sidebar ul {
