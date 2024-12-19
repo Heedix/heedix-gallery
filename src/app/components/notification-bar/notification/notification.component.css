@@ -1,0 +1,64 @@
+h1 {
+  font-size: 20px;
+}
+
+.notification {
+  height: fit-content;
+  width: 330px;
+  margin: 10px;
+  background-color: #353535BF;
+  backdrop-filter: blur(25px);
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.table {
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+}
+
+.notification-header-row {
+  font-size: 20px;
+  font-weight: 600;
+  color: #707070;
+}
+
+.table-vert-align-middle {
+  vertical-align: middle;
+}
+
+.notification-icon-item {
+  width: 32px;
+}
+
+.notification-type.error {
+  color: #DA3E3E;
+}
+
+.notification-type.warning {
+  color: #FA3;
+}
+
+.notification-type.success {
+  color: #20CC20;
+}
+
+.table-left {
+  text-align: left;
+}
+
+.table-right {
+  text-align: right;
+}
+
+.notification-content-row {
+  width: 100%;
+}
+
+.notification-content {
+  font-size: 16px;
+  color: #FFF;
+  width: 100%;
+  padding: 5px;
+}
