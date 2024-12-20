@@ -47,8 +47,16 @@ export class AccountSidebarComponent implements OnInit {
    * OnInit lifecycle hook to check authentication and load user data
    */
   async ngOnInit() {
+    await this.loadComponent();
+    this.authService.loginStatus$.subscribe(() => {
+        this.loadComponent();
+    });
+  }
+
+  async loadComponent() {
     this.userId = await this.authService.isAuthenticated();
     this.isLoggedIn = !!this.userId;
+
     if (this.isLoggedIn) {
       const extensions = ['.jpg', '.png'];
       this.username = localStorage.getItem('username');
@@ -59,6 +67,9 @@ export class AccountSidebarComponent implements OnInit {
           break;
         }
       }
+    } else {
+      this.username = 'Unknown';
+      this.profilePictureUrl = '/assets/icons/question-mark-gray.svg';
     }
   }
 
