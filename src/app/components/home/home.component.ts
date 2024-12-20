@@ -7,19 +7,21 @@ import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {UploadComponent} from "../upload/upload.component";
 import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
+import {NotificationBarComponent} from "../notification-bar/notification-bar.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    ImagesComponent,
-    NgForOf,
-    NavbarComponent,
-    NgOptimizedImage,
-    SidebarComponent,
-    UploadComponent,
-    AccountSidebarComponent
-  ],
+    imports: [
+        ImagesComponent,
+        NgForOf,
+        NavbarComponent,
+        NgOptimizedImage,
+        SidebarComponent,
+        UploadComponent,
+        AccountSidebarComponent,
+        NotificationBarComponent
+    ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -41,7 +43,6 @@ export class HomeComponent implements OnInit {
         size: parseInt(item.size),
         visibility: item.visibility
       }));
-      console.log(this.imageInterfaceList)
     })
   }
 }

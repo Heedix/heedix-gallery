@@ -1,0 +1,8 @@
+.notification-bar {
+  position: fixed;
+  width: 350px;
+  height: fit-content;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
