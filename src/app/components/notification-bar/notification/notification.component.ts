@@ -19,6 +19,8 @@ export class NotificationComponent implements OnInit {
 
   hover: boolean = false;
   formatedExpirationTime: string = '';
+  iconUrl: string = '';
+  formatedType: string = '';
 
   /**
    * Deletes the notification with a slide-out animation
@@ -76,6 +78,24 @@ export class NotificationComponent implements OnInit {
   ngOnInit() {
     if (this.notification.expirationTime >= 0) {
       this.countDown(this.notification.expirationTime);
+    }
+    switch (this.notification.type) {
+      case 'error':
+        this.iconUrl = 'assets/icons/error-red.svg';
+        this.formatedType = 'Error';
+        break;
+      case 'warning':
+        this.iconUrl = 'assets/icons/warning-yellow.svg';
+        this.formatedType = 'Warning';
+        break;
+      case 'info':
+        this.iconUrl = 'assets/icons/info-gray.svg';
+        this.formatedType = 'Info';
+        break;
+      case 'success':
+        this.iconUrl = 'assets/icons/success-green.svg';
+        this.formatedType = 'Success';
+        break;
     }
   }
 }
