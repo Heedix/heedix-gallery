@@ -17,10 +17,16 @@ export class SearchbarComponent {
 
   @Output() searchChange = new EventEmitter<string>();
 
+  /**
+   * Emits the search query when the search is performed
+   */
   onSearch() {
     this.searchChange.emit(this.searchQuery);
   }
 
+  /**
+   * Resets the search query and emits an empty string
+   */
   resetSearch() {
     this.searchQuery = '';
     this.searchChange.emit(this.searchQuery);

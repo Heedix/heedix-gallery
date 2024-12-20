@@ -16,6 +16,9 @@ import {RouterOutlet} from "@angular/router";
 export class SidebarComponent {
   isSidebarCollapsed = true
 
+  /**
+   * Toggles the sidebar collapsed state
+   */
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }

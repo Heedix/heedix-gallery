@@ -19,14 +19,20 @@ export class NotificationBarComponent implements OnInit{
 
   constructor(private notificationService: NotificationService) {}
 
+  /**
+   * OnInit lifecycle hook to subscribe to notifications$ observable
+   */
   ngOnInit() {
     this.notificationService.notifications$.subscribe((notification) => {
       this.notifications.push(notification);
     });
   }
 
+  /**
+   * Removes a notification by its id
+   * @param {number} id - The id of the notification to be removed
+   */
   removeNotification(id: number) {
-    console.log('Removing notification with id: ' + id + ' notification-bar.removeNotification()');
     this.notifications = this.notifications.filter((notification) => notification.id !== id);
   }
 }

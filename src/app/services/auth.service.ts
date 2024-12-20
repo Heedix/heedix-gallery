@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import CryptoJS from 'crypto-js';
 import {environment} from '../environments/environment';
+import {Router} from "@angular/router";
 
 const API_URL = environment.apiUrl;
 
@@ -10,7 +11,7 @@ const API_URL = environment.apiUrl;
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   register(email: string, username: string, password: string): Observable<any> {
@@ -54,6 +55,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
+    this.router.navigate(['/']).then(r => r);
   }
 
   /*

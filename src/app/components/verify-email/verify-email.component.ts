@@ -3,21 +3,22 @@ import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from '@angular/common/http';
 import {NgClass} from "@angular/common";
 import { Router } from '@angular/router';
-import {FormGroupName} from "@angular/forms";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
 import {environment} from "../../environments/environment";
+import {NotificationBarComponent} from "../notification-bar/notification-bar.component";
 
 const API_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-verify-email',
   standalone: true,
-  imports: [
-    NgClass,
-    SidebarComponent,
-    AccountSidebarComponent
-  ],
+    imports: [
+        NgClass,
+        SidebarComponent,
+        AccountSidebarComponent,
+        NotificationBarComponent
+    ],
   templateUrl: './verify-email.component.html',
   styleUrl: './verify-email.component.css'
 })
@@ -26,14 +27,27 @@ export class VerifyEmailComponent implements OnInit {
   infoMessage: string = 'Verification in progress...';
   infoType: string = 'neutral';
 
+  /**
+   * Constructor to inject services
+   * @param {ActivatedRoute} route - The activated route to get query parameters
+   * @param {HttpClient} http - The HTTP client for making requests
+   * @param {Router} router - The router service for navigation
+   */
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
-
+  /**
+   * Displays a notification message
+   * @param {string} message - The message to display
+   * @param {string} [type='info'] - The type of the message
+   */
   notification(message: string, type: string = 'info'): void {
     this.infoMessage = message;
     this.infoType = type;
   }
 
+  /**
+   * OnInit lifecycle hook to verify the email token
+   */
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
       this.token = params.get('token');

@@ -19,7 +19,7 @@ const API_URL = environment.apiUrl;
   styleUrl: './account-sidebar.component.css'
 })
 export class AccountSidebarComponent implements OnInit {
-  constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) {}
+  constructor(private authService: AuthService, private notificationService: NotificationService) {}
 
   isSidebarCollapsed = true;
   isLoggedIn = false;
@@ -28,16 +28,24 @@ export class AccountSidebarComponent implements OnInit {
   username: string | null = 'Unknown';
   profilePictureUrl = '/assets/icons/question-mark-gray.svg';
 
+  /**
+   * Toggles the sidebar collapsed state
+   */
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 
+  /**
+   * Logs out the user and adds a notification
+   */
   logout() {
     this.authService.logout()
     this.notificationService.addNotification( 'Logged out successfully', 'info', 5);
-    this.router.navigate(['/']).then(r => r);
   }
 
+  /**
+   * OnInit lifecycle hook to check authentication and load user data
+   */
   async ngOnInit() {
     this.userId = await this.authService.isAuthenticated();
     this.isLoggedIn = !!this.userId;
@@ -54,6 +62,11 @@ export class AccountSidebarComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks if an image exists at the given URL
+   * @param {string} url - The URL of the image
+   * @returns {Promise<boolean>} - True if the image exists, false otherwise
+   */
   private async imageExists(url: string): Promise<boolean> {
     try {
       const response = await fetch(url, {method: 'HEAD'});

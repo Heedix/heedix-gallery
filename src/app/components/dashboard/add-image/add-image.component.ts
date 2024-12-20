@@ -48,15 +48,26 @@ export class AddImageComponent {
 
   draggedOver = false;
 
+  /**
+   * Handles the drag over event
+   * @param {DragEvent} event - The drag event
+   */
   onDragOver(event: DragEvent) {
     event.preventDefault();
     this.draggedOver = true;
   }
 
+  /**
+   * Handles the drag leave event
+   */
   onDragLeave() {
     this.draggedOver = false;
   }
 
+  /**
+   * Handles the drop event
+   * @param {DragEvent} event - The drop event
+   */
   onDrop(event: DragEvent) {
     event.preventDefault();
     this.draggedOver = false;
@@ -66,10 +77,17 @@ export class AddImageComponent {
     }
   }
 
+  /**
+   * Triggers the file input click event
+   */
   triggerFileInput() {
     this.fileInput.nativeElement.click();
   }
 
+  /**
+   * Handles the file selected event
+   * @param {Event} event - The file input change event
+   */
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -77,6 +95,10 @@ export class AddImageComponent {
     }
   }
 
+  /**
+   * Processes the selected file
+   * @param {File} file - The selected file
+   */
   processFile(file: File) {
     const ext = this.getFileExtension(file.name);
     if ((ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') || !file.type.startsWith('image/')) {
@@ -95,11 +117,20 @@ export class AddImageComponent {
     }
   }
 
+  /**
+   * Gets the file extension
+   * @param {string} filename - The file name
+   * @returns {string} - The file extension
+   */
   getFileExtension = (filename: string): string => {
     const dotIndex = filename.lastIndexOf('.');
     return dotIndex !== -1 ? filename.slice(dotIndex) : '';
   };
 
+  /**
+   * Gets the metadata of the file
+   * @param {File} file - The selected file
+   */
   async getFileMetaData(file: File) {
 
     let requestData = [
@@ -155,16 +186,26 @@ export class AddImageComponent {
     this.lensModel = extractedData['lensModel'] || undefined;
   }
 
+  /**
+   * Disables the drag event
+   * @param {DragEvent} event - The drag event
+   */
   disableDrag(event: DragEvent): void {
     event.preventDefault();
   }
 
+  /**
+   * Closes the component
+   */
   closeComponent() {
     this.componentClosed = true;
     this.stateChanged.emit(this.componentClosed);
     this.selectedFile = null;
   }
 
+  /**
+   * Submits the form data
+   */
   onSubmit() {
     if (this.selectedFile) {
       const formData = new FormData();

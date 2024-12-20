@@ -67,3 +67,8 @@ h1 {
   translate: 100%;
   transition: translate 0.3s;
 }
+
+.slide-in-right {
+  -webkit-animation: slide-in-right 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-right 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
