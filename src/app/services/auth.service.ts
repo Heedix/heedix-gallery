@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import CryptoJS from 'crypto-js';
 import {environment} from '../environments/environment';
+import {Router} from "@angular/router";
 
 const API_URL = environment.apiUrl;
 
@@ -10,8 +11,11 @@ const API_URL = environment.apiUrl;
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
+
+  private loginStatus = new BehaviorSubject<boolean>(false);
+  loginStatus$ = this.loginStatus.asObservable();
 
   register(email: string, username: string, password: string): Observable<any> {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
@@ -20,6 +24,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
+    this.isAuthenticated().then(r => r);
     return this.http.post(API_URL + '/auth/login', {username, encryptedPassword});
   }
 
@@ -32,8 +37,10 @@ export class AuthService {
     });
     if (response.ok) {
       const data = await response.json();
+      this.loginStatus.next(true)
       return data.userId || null;
     }
+    this.loginStatus.next(false);
     return null;
   }
 
@@ -54,15 +61,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
+    this.isAuthenticated().then(r => r);
+    this.router.navigate(['/']).then(r => r);
   }
-
-  /*
-  authenticate(): Observable<any> {
-    const token = localStorage.getItem('authToken');
-    return this.http.get(this.apiUrl + '/protected', {
-      headers: {
-        Authorization: `Bearer ${token}` // Token im Header senden
-      }
-    });
-  }*/
 }

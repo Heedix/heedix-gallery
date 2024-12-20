@@ -1,0 +1,20 @@
+<div id="notification" class="slide-in-right" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+  <table class="table">
+    <tr class="notification-header-row">
+      <td class="notification-icon-item"><img [ngSrc]="iconUrl" alt="" width="32" height="32" class="table-left table-vert-align-middle"></td>
+      <td class="table-left table-vert-align-middle notification-type" [ngClass]="{
+        'error': notification.type === 'error',
+        'warning': notification.type === 'warning',
+        'info': notification.type === 'info',
+        'success': notification.type === 'success'}">
+        {{formatedType}}</td>
+      <td *ngIf="notification.expirationTime < 0" class="table-right table-vert-align-middle">
+        <img ngSrc="assets/icons/x-gray.svg" height="32" width="32" alt="" (click)="deleteNotification()">
+      </td>
+      <td *ngIf="notification.expirationTime >= 0" class="table-right table-vert-align-middle">{{formatedExpirationTime}}</td>
+    </tr>
+    <tr class="notification-content-row">
+      <td class="notification-content" colspan="3">{{notification.content}}</td>
+    </tr>
+  </table>
+</div>

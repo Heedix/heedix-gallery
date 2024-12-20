@@ -147,35 +147,3 @@ select:-webkit-autofill:focus {
 .toggle-login-register:hover {
   cursor: pointer;
 }
-
-.error-message {
-  display: none;
-  text-align: center;
-}
-
-.error-message.infoIsError {
-  color: #AA3333;
-  font-weight: bold;
-  display: inline;
-}
-
-.error-message.infoIsInfo {
-  color: #33AA33;
-  font-weight: bold;
-  display: inline;
-}
-
-/**.login {
-  height: 0;
-  width: 0;
-  overflow: hidden;
-  filter: none;
-}
-
-*.register {
-  height: 0;
-  width: 0;
-  overflow: hidden;
-  filter: none;
-}
-*/

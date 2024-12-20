@@ -16,7 +16,6 @@
       <input [type]="isPasswordVisible ? 'text' : 'password'" maxlength="25" id="repeat-password" class="input-field" [(ngModel)]="repeatPassword" name="repeat-password" placeholder="Repeat Password"  required />
     </div>
     <p class="toggle-login-register" (click)="toggleRegisterShown()"> {{loginRegisterToggleText}} </p>
-    <p class="error-message" [ngClass]="{'infoIsError': infoType === 'error', 'infoIsInfo': infoType === 'info'}">{{infoMessage}}</p>
     <button type="submit" class="buttons" [disabled]="!isFormValid()"> {{loginRegisterButtonText}} </button>
   </form>
 </div>

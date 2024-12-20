@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
 import {response} from "express";
 import {ImageInterface} from "../interfaces/ImageInterface";
-import {folderOrImageInterface} from "../interfaces/folderOrImageInterface";
+import {folderOrImageInterface} from "../interfaces/FolderOrImageInterface";
 import {environment} from "../environments/environment";
 
 const API_URL = environment.apiUrl;
@@ -66,32 +66,11 @@ export class ImageService {
     );
   }
 
-  /*imageInterfaceList: ImageInterface[] = [];
-
-  public mapResponseAsImageInterface(input: Observable<any[]>) {
-    let returnInterfaceList: ImageInterface[] = [];
-    input.subscribe((imageInterfaceList) => {
-      returnInterfaceList = imageInterfaceList.map((item: any) => ({
-        imageId: item.imageid,
-        source: item.source,
-        downloads: item.downloads,
-        width: item.width,
-        height: item.height,
-        size: parseInt(item.size),
-        visible: item.visible
-      }));
-    })
-    console.log(this.imageInterfaceList + 'hallo hallo hallo')
-    return returnInterfaceList;
-  }*/
-
   public updateImages() {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-
-    //this.http.put<any>('${this.baseUrl}/images/:imageid', body)
   }
 }
