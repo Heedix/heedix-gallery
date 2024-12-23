@@ -37,7 +37,7 @@ export class AuthService {
     });
     if (response.ok) {
       const data = await response.json();
-      this.loginStatus.next(true)
+      this.loginStatus.next(true);
       return data.userId || null;
     }
     this.loginStatus.next(false);
