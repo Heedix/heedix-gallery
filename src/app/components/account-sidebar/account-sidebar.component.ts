@@ -47,11 +47,9 @@ export class AccountSidebarComponent implements OnInit {
    * OnInit lifecycle hook to check authentication and load user data
    */
   async ngOnInit() {
-    await this.loadComponent();
-    this.authService.loginStatus$.subscribe((status) => {
-      if (status !== this.isLoggedIn) {
-        this.loadComponent();
-      }
+    this.authService.loginStatus$.subscribe(async status => {
+      console.log(status);
+      await this.loadComponent();
     });
   }
 

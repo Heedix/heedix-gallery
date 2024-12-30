@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, tap} from 'rxjs';
 import CryptoJS from 'crypto-js';
 import {environment} from '../environments/environment';
 import {Router} from "@angular/router";
@@ -24,8 +24,17 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
-    this.isAuthenticated().then(r => r);
-    return this.http.post(API_URL + '/auth/login', {username, encryptedPassword});
+    return this.http.post(API_URL + '/auth/login', {username, encryptedPassword}).pipe(
+      tap({
+        next: (response: any) => {
+          setTimeout(() => this.loginStatus.next(true), 100);
+        },
+        error: (error: any) => {
+          console.log('Error received:', error);
+          this.loginStatus.next(false);
+        }
+      })
+    );
   }
 
   async isAuthenticated(): Promise<string | null> {
@@ -37,10 +46,8 @@ export class AuthService {
     });
     if (response.ok) {
       const data = await response.json();
-      this.loginStatus.next(true);
       return data.userId || null;
     }
-    this.loginStatus.next(false);
     return null;
   }
 
@@ -61,7 +68,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
-    this.isAuthenticated().then(r => r);
+    this.loginStatus.next(false);
     this.router.navigate(['/']).then(r => r);
   }
 }

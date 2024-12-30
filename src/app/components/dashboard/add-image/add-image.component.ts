@@ -1,8 +1,9 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {NgIf, NgOptimizedImage} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import ExifReader from 'exifreader';
 import {environment} from "../../../environments/environment";
+import {FolderService} from "../../../services/folder.service";
 
 const API_URL = environment.apiUrl;
 
@@ -13,7 +14,8 @@ const API_URL = environment.apiUrl;
     NgOptimizedImage,
     ReactiveFormsModule,
     FormsModule,
-    NgIf
+    NgIf,
+    NgForOf
   ],
   templateUrl: './add-image.component.html',
   styleUrl: './add-image.component.css'
@@ -25,6 +27,8 @@ export class AddImageComponent {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   selectedFile: File | null = null;
+
+  folders:{folderId: string, deletable: boolean, name: string}[] = [];
 
   name: string | undefined;
   visibility = 'Not-Listed';
@@ -44,9 +48,13 @@ export class AddImageComponent {
   focalLength: string | undefined;
   whiteBalance: string | undefined;
   focalLengthEquivalent: string | undefined;
+  folder: string | undefined;
   previewSrc: string | ArrayBuffer | null | undefined = null;
 
   draggedOver = false;
+
+  constructor(private folderService: FolderService) {
+  }
 
   /**
    * Handles the drag over event
@@ -93,6 +101,12 @@ export class AddImageComponent {
     if (input.files && input.files.length > 0) {
       this.processFile(input.files[0]);
     }
+    this.folderService.getEditableFolders().then((folders: {folderId: string, deletable: boolean, name: string, owner: string}[]) => {
+      this.folders = folders;
+      console.log(folders);
+      this.folder = folders.filter((folder) => !folder.deletable && folder.owner === localStorage.getItem('username'))[0].folderId;
+      console.log(this.folder);
+    });
   }
 
   /**
@@ -228,6 +242,8 @@ export class AddImageComponent {
       formData.append('focalLength', this.focalLength || '');
       formData.append('whiteBalance', this.whiteBalance || '');
       formData.append('focalLengthEquivalent', this.focalLengthEquivalent || '');
+      formData.append('folder', this.folder || '');
+      console.log(this.folder);
 
       fetch(`${API_URL}/upload`, {
         method: 'POST',

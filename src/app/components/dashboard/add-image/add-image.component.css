@@ -110,6 +110,13 @@ button:active {
   width: 100%;
 }
 
+.label {
+  font-size: 20px;
+  position: relative;
+  top: 38px;
+  left: 5px;
+}
+
 .input-field {
   width: 100%;
   max-width: 90vw;
@@ -117,7 +124,6 @@ button:active {
   background-color: #909090;
   border-radius: 12px;
   border-style: none;
-  padding-left: 20px;
 }
 
 .input-field:focus {
@@ -130,16 +136,30 @@ button:active {
 
 .input-field::placeholder {
   color: rgba(170, 170, 170, 0.67);
+  opacity: 0;
+}
+
+.input-field:focus + label {
+  top: 10px;
+  left: 5px;
+  font-size: 15px;
+}
+
+.input-field:focus + label,
+.input-field:not(:placeholder-shown) + label {
+  top: 10px;
+  left: 5px;
+  font-size: 15px;
 }
 
 .selectors {
-  width: 105%;
+  width: 100%;
   max-width: 90vw;
   height: 50px;
   background-color: #909090;
   border-radius: 12px;
   border-style: none;
-  padding-left: 20px;
+
 }
 
 .selectors::placeholder {
@@ -160,6 +180,13 @@ button:active {
   width: 100%;
   height: auto;
   max-height: 90vh;
+}
+
+.folder-selector-container {
+  width: 100%;
+  max-width: 500px;
+  height: 50px;
+  margin: 20px auto;
 }
 
 .submit-button {
