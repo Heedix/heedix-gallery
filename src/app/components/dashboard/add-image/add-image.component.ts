@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import ExifReader from 'exifreader';
 import {environment} from "../../../environments/environment";
 import {FolderService} from "../../../services/folder.service";
+import {NotificationService} from "../../../services/notification.service";
 
 const API_URL = environment.apiUrl;
 
@@ -53,8 +54,7 @@ export class AddImageComponent {
 
   draggedOver = false;
 
-  constructor(private folderService: FolderService) {
-  }
+  constructor(private folderService: FolderService, private notificationService: NotificationService) {}
 
   /**
    * Handles the drag over event
@@ -104,7 +104,7 @@ export class AddImageComponent {
     this.folderService.getEditableFolders().then((folders: {folderId: string, deletable: boolean, name: string, owner: string}[]) => {
       this.folders = folders;
       console.log(folders);
-      this.folder = folders.filter((folder) => !folder.deletable && folder.owner === localStorage.getItem('username'))[0].folderId;
+      this.folder = folders.filter((folder) => !folder.deletable && folder.owner === localStorage.getItem('userId'))[0].folderId;
       console.log(this.folder);
     });
   }
@@ -217,6 +217,10 @@ export class AddImageComponent {
     this.selectedFile = null;
   }
 
+  sendNotification(content: string, type: string, expirationTime: number) {
+    this.notificationService.addNotification(content, type, expirationTime);
+  }
+
   /**
    * Submits the form data
    */
@@ -243,7 +247,6 @@ export class AddImageComponent {
       formData.append('whiteBalance', this.whiteBalance || '');
       formData.append('focalLengthEquivalent', this.focalLengthEquivalent || '');
       formData.append('folder', this.folder || '');
-      console.log(this.folder);
 
       fetch(`${API_URL}/upload`, {
         method: 'POST',
@@ -256,7 +259,7 @@ export class AddImageComponent {
           this.closeComponent();
           this.imageAdded.emit();
         } else {
-          alert(response.statusText);
+          this.sendNotification(response.statusText, 'error', -1);
         }
       });
     }
