@@ -1,6 +1,7 @@
-<div *ngIf="signedUrl" class="card-container">
+<div class="card-container">
   <div class="folder-thumbnail-container">
-    <img class="folder-thumbnail" ngSrc="{{signedUrl}}" width="300" height="400" alt=""/>
+    <img *ngIf="signedUrl" class="folder-thumbnail" ngSrc="{{signedUrl}}" width="300" height="400" alt=""/>
+    <img *ngIf="!signedUrl" class="folder-thumbnail" ngSrc="/assets/icons/question-mark-gray.svg" width="300" height="400" alt=""/>
   </div>
   <div class="folder-icon-container">
     <img class="folder-icon" ngSrc="/assets/icons/folder-gray.svg" width="42" height="42" alt=""/>

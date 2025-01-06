@@ -85,7 +85,7 @@ export class NotificationComponent implements OnInit {
         this.formatedType = 'Error';
         break;
       case 'warning':
-        this.iconUrl = 'assets/icons/warning-yellow.svg';
+        this.iconUrl = 'assets/icons/warning-orange.svg';
         this.formatedType = 'Warning';
         break;
       case 'info':
