@@ -4,9 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {NgClass} from "@angular/common";
 import { Router } from '@angular/router';
 import {SidebarComponent} from "../sidebar/sidebar.component";
-import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.component";
 import {environment} from "../../environments/environment";
-import {NotificationBarComponent} from "../notification-bar/notification-bar.component";
 
 const API_URL = environment.apiUrl;
 
@@ -15,9 +13,7 @@ const API_URL = environment.apiUrl;
   standalone: true,
     imports: [
         NgClass,
-        SidebarComponent,
-        AccountSidebarComponent,
-        NotificationBarComponent
+        SidebarComponent
     ],
   templateUrl: './verify-email.component.html',
   styleUrl: './verify-email.component.css'
@@ -52,7 +48,7 @@ export class VerifyEmailComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       this.token = params.get('token');
       if (this.token) {
-        this.http.get(`${API_URL}/verify?token=` + this.token).subscribe( //TODO: Change to your server
+        this.http.get(`${API_URL}/verify?token=` + this.token).subscribe(
           () => {
             this.notification('Verification successful!', 'info')
             setTimeout(() => this.router.navigate(['/']), 5000);
