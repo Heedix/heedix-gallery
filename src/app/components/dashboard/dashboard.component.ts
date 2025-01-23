@@ -22,11 +22,9 @@ import {NotificationBarComponent} from "../notification-bar/notification-bar.com
         SearchbarComponent,
         NgIf,
         ImageCardComponent,
-        AccountSidebarComponent,
         NgClass,
         AddImageFolderCardComponent,
-        AddImageComponent,
-        NotificationBarComponent
+        AddImageComponent
     ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -103,6 +101,10 @@ export class DashboardComponent implements OnInit {
    */
   async reFetchImages() {
     this.images = await this.imageService.getAccountImages();
+    if(!this.folderViewShown) {
+      this.items = this.images;
+      this.onSearch(this.query);
+    }
     this.sendNotification('Image uploaded successfully', 'success', 5);
   }
 
@@ -111,6 +113,11 @@ export class DashboardComponent implements OnInit {
    */
   async reFetchFolders() {
     this.folders = await this.folderService.getAccountFolders();
+    if(this.folderViewShown) {
+      this.items = this.folders;
+      this.onSearch(this.query);
+    }
+    this.sendNotification('Folder created successfully', 'success', 5);
   }
 
   /**

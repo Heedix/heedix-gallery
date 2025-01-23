@@ -30,7 +30,7 @@ export class AuthService {
           setTimeout(() => this.loginStatus.next(true), 100);
         },
         error: (error: any) => {
-          console.log('Error received:', error);
+          console.error('Error received:', error);
           this.loginStatus.next(false);
         }
       })

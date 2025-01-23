@@ -48,7 +48,6 @@ export class AccountSidebarComponent implements OnInit {
    */
   async ngOnInit() {
     this.authService.loginStatus$.subscribe(async status => {
-      console.log(status);
       await this.loadComponent();
     });
   }
