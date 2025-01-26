@@ -32,7 +32,7 @@ export class AddImageComponent {
   folders:{folderId: string, deletable: boolean, name: string}[] = [];
 
   name: string | undefined;
-  visibility = 'Not-Listed';
+  visibility = "Not-Listed";
   width: number | undefined;
   make: string | undefined;
   height: number | undefined;
