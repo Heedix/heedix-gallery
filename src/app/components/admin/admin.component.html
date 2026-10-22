@@ -1,0 +1,63 @@
+<app-sidebar></app-sidebar>
+<div class="admin-shell">
+  <header>
+    <a class="brand" routerLink="/" aria-label="Heedix Gallery home"><img src="assets/images/heedix.png" alt="Heedix" width="200" height="100"></a>
+    <nav aria-label="Admin navigation">
+      <a routerLink="/">Back to gallery</a>
+      <button type="button" (click)="logout()">Log out</button>
+    </nav>
+  </header>
+  <main>
+    <div class="heading">
+      <img class="page-icon" src="assets/icons/settings-gray.svg" alt="" width="128" height="128">
+      <h1>Admin panel</h1>
+      <p class="hint">Manage gallery access and availability</p>
+      <p *ngIf="saved" class="setting-state" [class.off]="siteStatus.settings()?.maintenanceMode">
+        {{ siteStatus.settings()?.maintenanceMode ? 'Maintenance active' : 'Gallery online' }}
+      </p>
+    </div>
+    <p *ngIf="loading" role="status" class="notice">Loading settings …</p>
+    <div *ngIf="error" class="notice error" role="alert">
+      {{ error }} <button *ngIf="!saved" type="button" (click)="load()">Try again</button>
+    </div>
+    <p *ngIf="success && !dirty" class="notice success" role="status">{{ success }}</p>
+    <form *ngIf="saved && !loading" (ngSubmit)="save()">
+      <fieldset [disabled]="saving">
+        <div class="cards">
+          <section class="card">
+            <div class="card-top"><img src="assets/icons/login-gray.svg" alt="" width="48" height="48">
+              <label class="switch"><input type="checkbox" role="switch" aria-labelledby="login-heading"
+                name="loginEnabled" [(ngModel)]="draft.loginEnabled"><span class="track"></span></label></div>
+            <h2 id="login-heading">Allow login</h2>
+            <p>Controls new logins and registrations. Users who are already logged in can continue using the gallery.</p>
+            <span class="setting-state" [class.off]="!draft.loginEnabled">{{ draft.loginEnabled ? 'Login enabled' : 'Login disabled' }}</span>
+          </section>
+          <section class="card" [class.maintenance-active]="draft.maintenanceMode">
+            <div class="card-top"><img src="assets/icons/settings-gray.svg" alt="" width="48" height="48">
+              <label class="switch"><input type="checkbox" role="switch" aria-labelledby="maintenance-heading"
+                name="maintenanceMode" [(ngModel)]="draft.maintenanceMode"><span class="track"></span></label></div>
+            <h2 id="maintenance-heading">Maintenance mode</h2>
+            <p>Shows a maintenance page to all visitors. Gallery access, images and uploads are blocked during maintenance.</p>
+            <span class="setting-state" [class.off]="draft.maintenanceMode">{{ draft.maintenanceMode ? 'Maintenance page enabled' : 'Gallery available' }}</span>
+          </section>
+        </div>
+        <section class="message-card">
+          <div><h2><label for="maintenance-message">Visitor message</label></h2>
+            <p>This message appears on the maintenance page.</p></div>
+          <textarea id="maintenance-message" name="maintenanceMessage" [(ngModel)]="draft.maintenanceMessage"
+            rows="3" maxlength="500" required aria-describedby="message-count"></textarea>
+          <p id="message-count" class="counter">{{ draft.maintenanceMessage.length }} / 500 characters</p>
+          <p *ngIf="!draft.maintenanceMessage.trim()" class="error">Please enter a maintenance message.</p>
+        </section>
+      </fieldset>
+      <div class="save-row">
+        <div><p class="save-status">{{ dirty ? 'Unsaved changes' : 'All changes saved' }}</p>
+          <small>Last saved: {{ saved.updatedAt | date:'dd MMM yyyy, HH:mm' }}</small></div>
+        <div class="actions"><button type="button" class="secondary" (click)="reset()" [disabled]="!dirty || saving">Discard</button>
+          <button class="primary" type="submit" [disabled]="!dirty || saving || !draft.maintenanceMessage.trim()">
+            {{ saving ? 'Saving …' : 'Save changes' }}</button></div>
+      </div>
+    </form>
+    <footer class="hint">Admin access remains available with either setting enabled.</footer>
+  </main>
+</div>

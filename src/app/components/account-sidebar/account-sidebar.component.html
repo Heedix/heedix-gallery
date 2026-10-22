@@ -27,7 +27,13 @@
         Settings
       </a>
     </li>
-    <li *ngIf="!isLoggedIn">
+    <li *ngIf="isAdmin">
+      <a routerLink="/admin">
+        <img class="list-icons" ngSrc="assets/icons/settings-gray.svg" alt="" height="32" width="32">
+        Admin panel
+      </a>
+    </li>
+    <li *ngIf="!isLoggedIn && siteStatus.settings()?.loginEnabled">
       <a href="/login">
         <img class="list-icons" ngSrc="assets/icons/login-gray.svg" alt="" height="32" width="32">
         Login

@@ -147,3 +147,9 @@ select:-webkit-autofill:focus {
 .toggle-login-register:hover {
   cursor: pointer;
 }
+
+.login-disabled { text-align: center; line-height: 1.6; }
+.login-disabled h1 { font-size: 28px; }
+.login-disabled p { color: #c4c9d1; font-size: 16px; }
+.login-disabled a, .admin-access { color: #8bc4ff; }
+.admin-access { margin-top: 28px; font-size: 13px; }

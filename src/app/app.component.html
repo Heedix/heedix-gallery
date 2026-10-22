@@ -1,3 +1,14 @@
-<router-outlet />
-<app-account-sidebar></app-account-sidebar>
+<ng-container *ngIf="isAdminPage || (siteStatus.settings() && !siteStatus.settings()?.maintenanceMode && !siteStatus.unavailable()); else unavailable">
+  <router-outlet />
+  <app-account-sidebar *ngIf="!isAdminPage"></app-account-sidebar>
+</ng-container>
+<ng-template #unavailable>
+  <app-maintenance *ngIf="siteStatus.unavailable() || siteStatus.settings(); else loading"></app-maintenance>
+</ng-template>
+<ng-template #loading>
+  <div style="min-height: 100dvh; display: grid; place-content: center; gap: 24px; text-align: center; color: #ccc" role="status">
+    <span>Loading Heedix Gallery …</span>
+    <a routerLink="/admin/login" style="color: #8bc4ff">Admin access</a>
+  </div>
+</ng-template>
 <app-notification-bar></app-notification-bar>

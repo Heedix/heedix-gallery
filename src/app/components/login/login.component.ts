@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import {SiteStatusService} from '../../services/site-status.service';
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {NotificationService} from "../../services/notification.service";
@@ -12,6 +13,7 @@ import {AccountSidebarComponent} from "../account-sidebar/account-sidebar.compon
   standalone: true,
     imports: [
         FormsModule,
+        RouterLink,
         SidebarComponent,
         NgIf,
         NgOptimizedImage,
@@ -46,7 +48,12 @@ export class LoginComponent {
    * @param {Router} router - The router service for navigation
    * @param {NotificationService} notificationService - The notification service
    */
-  constructor(private authService: AuthService, private router: Router, private notificationService: NotificationService) {}
+  constructor(private authService: AuthService, private router: Router, private notificationService: NotificationService,
+              public siteStatus: SiteStatusService) {}
+
+  get loginAllowed(): boolean {
+    return this.siteStatus.settings()?.loginEnabled === true && !this.siteStatus.unavailable();
+  }
 
   /**
    * Toggles registration visibility
@@ -81,6 +88,7 @@ export class LoginComponent {
    * @returns {boolean} - True if the form is valid, false otherwise
    */
   isFormValid(): boolean {
+    if (!this.loginAllowed) return false;
     if (this.isRegisterShown) {
       return this.email.trim() !== '' && this.username.trim() !== '' && this.password.trim() !== '' && this.repeatPassword.trim() !== '';
     } else {
@@ -92,6 +100,7 @@ export class LoginComponent {
    * Handles the form submission for login or registration
    */
   onSubmit() {
+    if (!this.loginAllowed) return;
     this.email = this.email.trim();
     this.username = this.username.trim();
     this.password = this.password.trim();
@@ -117,9 +126,7 @@ export class LoginComponent {
       this.authService.login(this.username, this.password).subscribe(
         (response) => {
           this.sendNotification('login successful', 'success', 5);
-          localStorage.setItem('authToken', response.token);
-          localStorage.setItem('username', response.username);
-          localStorage.setItem('userId', response.userId);
+          this.authService.storeSession(response);
           setTimeout(() => this.router.navigate(['/dashboard']), 1000);
         },
         (error) => this.handleError(error)
@@ -132,7 +139,15 @@ export class LoginComponent {
    * @param {any} error - The error object
    */
   handleError(error: any) {
-    switch (error.error.errorCode) {
+    switch (error.error?.errorCode) {
+      case 'LOGIN_DISABLED':
+        this.siteStatus.refresh();
+        this.sendNotification('Login and registration are temporarily disabled.', 'info', 5);
+        break;
+      case 'MAINTENANCE_MODE':
+        this.siteStatus.refresh();
+        this.sendNotification('The gallery is currently under maintenance.', 'info', 5);
+        break;
       case 'EMAIL_TAKEN':
         this.sendNotification('This email is already taken.', 'error', 5);
         break;

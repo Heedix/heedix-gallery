@@ -1,0 +1,13 @@
+:host { display: block; color: #fff; font: 20px Roboto, "Helvetica Neue", sans-serif; }
+a { color: #4b96e1; text-underline-offset: 3px; }
+button, input, textarea { font: inherit; color: #fff; }
+button { min-height: 50px; padding: 10px 24px; border: 0; border-radius: 12px; background: #4b96e1; cursor: pointer; }
+button:hover { background: #338ade; }
+button:active { transform: translateY(1px); }
+button:disabled { background: #6080aa; cursor: default; transform: none; }
+:is(a, button, input, textarea):focus-visible { outline: 3px solid #4b96e1; outline-offset: 4px; }
+.brand img { display: block; width: 200px; height: 100px; object-fit: contain; }
+.page-icon { display: block; width: 128px; height: 128px; padding: 10px; margin: 25px auto; border: 10px solid #707070; border-radius: 50%; }
+.hint { color: #ccc; font-size: 16px; line-height: 1.6; }
+.error { color: #ffaaaa; }
+.success { color: #80dd80; }

@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
 import { AuthService } from '../../services/auth.service';
 import { environment } from '../../environments/environment';
 import {NotificationService} from "../../services/notification.service";
-import {Router} from "@angular/router";
+import {RouterLink} from "@angular/router";
+import {SiteStatusService} from '../../services/site-status.service';
 
 const API_URL = environment.apiUrl;
 
@@ -13,16 +15,20 @@ const API_URL = environment.apiUrl;
   imports: [
     NgOptimizedImage,
     NgClass,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './account-sidebar.component.html',
   styleUrl: './account-sidebar.component.css'
 })
 export class AccountSidebarComponent implements OnInit {
-  constructor(private authService: AuthService, private notificationService: NotificationService) {}
+  private readonly destroyRef = inject(DestroyRef);
+  constructor(private authService: AuthService, private notificationService: NotificationService,
+              public siteStatus: SiteStatusService) {}
 
   isSidebarCollapsed = true;
   isLoggedIn = false;
+  isAdmin = false;
   userId: string | null = null;
 
   username: string | null = 'Unknown';
@@ -47,13 +53,15 @@ export class AccountSidebarComponent implements OnInit {
    * OnInit lifecycle hook to check authentication and load user data
    */
   async ngOnInit() {
-    this.authService.loginStatus$.subscribe(async status => {
+    this.authService.loginStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(async () => {
       await this.loadComponent();
     });
   }
 
   async loadComponent() {
-    this.userId = await this.authService.isAuthenticated();
+    const session = await this.authService.getSession();
+    this.userId = session?.userId || null;
+    this.isAdmin = session?.isAdmin === true;
     this.isLoggedIn = !!this.userId;
 
     if (this.isLoggedIn) {

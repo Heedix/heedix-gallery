@@ -7,6 +7,12 @@ import {Router} from "@angular/router";
 
 const API_URL = environment.apiUrl;
 
+export interface AuthSession {
+  userId: string;
+  username: string;
+  isAdmin: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,9 +32,6 @@ export class AuthService {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
     return this.http.post(API_URL + '/auth/login', {username, encryptedPassword}).pipe(
       tap({
-        next: (response: any) => {
-          setTimeout(() => this.loginStatus.next(true), 100);
-        },
         error: (error: any) => {
           console.error('Error received:', error);
           this.loginStatus.next(false);
@@ -37,18 +40,41 @@ export class AuthService {
     );
   }
 
-  async isAuthenticated(): Promise<string | null> {
-    const response = await fetch(`${API_URL}/auth/authorize`, {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + localStorage.getItem('authToken')
+  adminLogin(username: string, password: string): Observable<any> {
+    const encryptedPassword = CryptoJS.SHA256(password).toString();
+    return this.http.post(`${API_URL}/admin/login`, {username, encryptedPassword});
+  }
+
+  storeSession(response: {token: string; username: string; userId: string}): void {
+    localStorage.setItem('authToken', response.token);
+    localStorage.setItem('username', response.username);
+    localStorage.setItem('userId', response.userId);
+    this.loginStatus.next(true);
+  }
+
+  async getSession(): Promise<AuthSession | null> {
+    if (!localStorage.getItem('authToken')) return null;
+    try {
+      const response = await fetch(`${API_URL}/auth/authorize`, {
+        cache: 'no-store',
+        signal: AbortSignal.timeout(10000),
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: 'Bearer ' + localStorage.getItem('authToken')
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data.userId ? data : null;
       }
-    });
-    if (response.ok) {
-      const data = await response.json();
-      return data.userId || null;
+      return null;
+    } catch {
+      return null;
     }
-    return null;
+  }
+
+  async isAuthenticated(): Promise<string | null> {
+    return (await this.getSession())?.userId || null;
   }
 
   async emailVerified(): Promise<boolean> {
@@ -68,6 +94,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
+    localStorage.removeItem('userId');
     this.loginStatus.next(false);
     this.router.navigate(['/']).then(r => r);
   }

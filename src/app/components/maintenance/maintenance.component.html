@@ -1,0 +1,16 @@
+<main class="maintenance-page">
+  <div class="brand"><img src="assets/images/heedix.png" alt="Heedix Gallery" width="200" height="100"></div>
+  <section aria-live="polite">
+    <img class="page-icon" src="assets/icons/settings-gray.svg" alt="" width="128" height="128">
+    <p>{{ siteStatus.unavailable() ? 'Connection interrupted' : 'Maintenance mode' }}</p>
+    <h1>{{ siteStatus.unavailable() ? 'Currently unavailable.' : 'We will be back soon.' }}</h1>
+    <p class="message">{{ siteStatus.unavailable()
+      ? 'The gallery is currently unavailable. Please try again shortly.'
+      : siteStatus.settings()?.maintenanceMessage }}</p>
+    <button type="button" (click)="siteStatus.refresh()" [disabled]="siteStatus.refreshing()">
+      {{ siteStatus.refreshing() ? 'Checking …' : 'Check again' }}
+    </button>
+    <p class="automatic">This page automatically checks whether the gallery is available again.</p>
+  </section>
+  <a routerLink="/admin/login">Admin access</a>
+</main>

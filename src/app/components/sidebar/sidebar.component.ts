@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {NgClass, NgOptimizedImage} from "@angular/common";
+import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
+import {SiteStatusService} from '../../services/site-status.service';
 import {RouterOutlet} from "@angular/router";
 
 @Component({
@@ -7,6 +8,7 @@ import {RouterOutlet} from "@angular/router";
   standalone: true,
   imports: [
     NgClass,
+    NgIf,
     RouterOutlet,
     NgOptimizedImage
   ],
@@ -14,6 +16,7 @@ import {RouterOutlet} from "@angular/router";
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  constructor(public siteStatus: SiteStatusService) {}
   isSidebarCollapsed = true
 
   /**

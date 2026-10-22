@@ -1,0 +1,9 @@
+main { width: 80%; max-width: 600px; margin: 50px auto; text-align: center; filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, .5)); }
+h1 { font-size: 28px; margin: 20px 0; }
+form { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 25px 0; }
+label { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+input { width: 100%; height: 50px; box-sizing: border-box; padding: 0 15px; background: #909090; border: 0; border-radius: 12px; text-align: center; }
+input::placeholder { color: #e0e0e0; }
+input:autofill { -webkit-text-fill-color: #fff; box-shadow: 0 0 0 1000px #909090 inset; }
+button { width: 80%; }
+.back { display: inline-block; margin: 15px 0 30px; }

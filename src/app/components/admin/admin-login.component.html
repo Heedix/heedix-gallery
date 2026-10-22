@@ -1,0 +1,20 @@
+<app-sidebar></app-sidebar>
+<main>
+  <img class="page-icon" src="assets/icons/login-gray.svg" alt="" width="128" height="128">
+  <section>
+    <h1>Admin login</h1>
+    <p class="hint">Log in with your admin account to manage the gallery.</p>
+    <form (ngSubmit)="login()">
+      <label for="admin-username">Username</label>
+      <input id="admin-username" name="username" [(ngModel)]="username" autocomplete="username" placeholder="Username" required [disabled]="submitting">
+      <label for="admin-password">Password</label>
+      <input id="admin-password" name="password" type="password" [(ngModel)]="password" autocomplete="current-password" placeholder="Password" required [disabled]="submitting">
+      <p class="error" role="alert" *ngIf="error">{{ error }}</p>
+      <button type="submit" [disabled]="submitting || !username.trim() || !password">
+        {{ submitting ? 'Logging in …' : 'Open admin panel' }}
+      </button>
+    </form>
+    <p class="hint">This login remains available when regular login is disabled and during maintenance.</p>
+  </section>
+  <a class="back" routerLink="/">← Back to gallery</a>
+</main>

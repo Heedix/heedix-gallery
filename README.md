@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
 
+## Admin-Panel
+
+Unter `/admin` können Administratoren neue Anmeldungen und Registrierungen sperren, den Wartungsmodus für die gesamte Galerie schalten und den Wartungstext anpassen. Änderungen werden erst mit **Änderungen speichern** aktiv. Bestehende Sitzungen bleiben bei einer Login-Sperre erhalten.
+
+Der separate Zugang `/admin/login` bleibt auch während der Wartung erreichbar. Er verwendet vorhandene Konten mit `permissionlevel > 5`. Im Account-Menü sehen diese Nutzer einen Link zum Admin-Panel. Die API prüft die Berechtigung unabhängig vom Frontend.
+
+Voraussetzung ist die aktualisierte `heedix-gallery-api` mit den Endpunkten `/v1/site-status` und `/v1/admin/*`. Die API legt die dauerhaften Einstellungen beim Start in PostgreSQL an; Details stehen in der API-README. Frontend und API müssen zusammen aktualisiert werden. Es wurden keine Live-Einstellungen verändert.
+
+Besucher sehen im Wartungsmodus auf allen Galerie-Routen die Wartungsseite. Bereits geöffnete Seiten prüfen alle 15 Sekunden auf Änderungen und geben die Galerie nach Ende der Wartung automatisch wieder frei. Bei nicht erreichbarem Seitenstatus wird eine Seite mit Wiederholungsoption und Admin-Zugang angezeigt.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
